@@ -1,25 +1,23 @@
-<!-- <div class="scrollable modal col-lg-8 center-block" ui-if="validarSalida" ui-state="validarSalida">
+<div class="scrollable modal col-lg-6 center-block" ui-if='validarSalida' ui-state='validarSalida' ng-controller="inspectorController">
     <div class="modal-backdrop in"></div>
     <div class="scrollable-content modal-dialog">
         <div class="modal-content">
-            <div class="container col-xs-12" style="margin-bottom: 3%;">
-                <div class="modal-header">
-                    <button class="close" ui-turn-off="modalVista">&times;</button>
-                    <label>Orden de Trabajo {{modalSolicitud.id_orden_trabajo}}</label>
+            <div class="container col-xs-12" style="margin-bottom: 5%;">
+                <div class="modal-header" style="margin-bottom: 2%;">
+                    <h3>Advertencia</h3>
+                </div>
+                <center><h3>Tiene archivos sin enviar</h3></center>
+                <center><h3>Si continua perdera los cambios</h3></center>
+                <div style="margin-top: 2%;">
+                    <span class="col-md-1"></span>
+                    <span class="col-md-4"><button class="btn btn-success col-md-12" ng-click="cerrarModales()">Continuar</button></span>
+                    <span class="col-md-2"></span>
+                    <span class="col-md-4"><button class="btn btn-danger col-md-12" ui-turn-off="validarSalida">Cancelar</button></span>
+                    <span class="col-md-1"></span>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-
+            <div class="modal-footer">
+            </div>
         </div>
     </div>
-</div> -->
-<script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-        </div>
-        <div class="modal-footer">
-        </div>
-    </script>
+</div>

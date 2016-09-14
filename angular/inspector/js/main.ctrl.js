@@ -1458,11 +1458,21 @@ app.controller('inspectorController', ['$scope', '$http', '$rootScope', '$notify
         popupWin.document.close();
     }
 
-    // $scope.validarSalida = function(lista){
-    //
-    //
-    //
-    // };
+    $scope.validarSalida = function(lista){
+
+        if (lista.length !== 0) {
+            $scope.Ui.turnOn('validarSalida');
+        }else{
+            $scope.Ui.turnOff('modalObservacion');
+        }
+
+
+    };
+
+    $scope.cerrarModales = function(){
+        $scope.Ui.turnOff('validarSalida');
+        $scope.Ui.turnOff('modalObservacion');
+    }
 
     $scope.agregarObservacion = function(solicitud, observacion, id_lote, listaEvidencias) {
 
