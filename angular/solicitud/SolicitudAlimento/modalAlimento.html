@@ -13,19 +13,19 @@
 
           <div class="col-md-12" style="margin-bottom: 1%;">
             <label class="col-md-3">N° Cotización</label>
-            <input class="col-md-3 form-control" ng-model="codigo" placeholder="N° Cotización">
-            <select class="form-control col-md-6" ng-model="retiro">
+            <span class="col-md-3"><input class="col-md-12 form-control" ng-model="codigo" placeholder="N° Cotización"></span>
+            <span class="col-md-6"><select class="form-control col-md-12" ng-model="retiro">
               <option value="muestreo">Muestreo</option>
               <option value="retiro">Retiro</option>
-            </select>
+            </select></span>
           </div>
 
-          <div class="col-md-12">
+          <div class="col-md-12" style="margin-top: 2%;">
             <label class="col-md-3">Tipo</label>
             <textarea class="col-md-9 form-control" ng-model="tipo" placeholder="Tipo"></textarea>
           </div>
 
-          <div class="col-md-12" style="margin-bottom: 1%; margin-top: 1%;">
+          <div class="col-md-12" style="margin-bottom: 2%; margin-top: 2%;">
             <label class="col-md-3">Analisis</label>
             <select class="form-control col-md-9" ng-model="tipoAnalisis" ng-change="SeleccionAnalisis(tipoAnalisis)" ng-options="opt as opt.descripcion for opt in listaTipoAnalisis" >
               <option style="display: none;" value="" selected>Seleccione</option>
@@ -46,7 +46,7 @@
             </select>
           </div>
 
-          <button class="col-md-12 btn btn-primary" ng-click="agregarListaAnalisis(tipoAnalisis, listaSubAnalisis, alimentosRsa, subAlimentosRsa)" style="margin-bottom: 1%;">Agregar</button>
+          <button class="col-md-12 btn btn-primary" ng-click="agregarListaAnalisis(tipoAnalisis, listaSubAnalisis, alimentosRsa, subAlimentosRsa)" style="margin-bottom: 1%;">Agregar Análisis</button>
 
           <div class="col-md-12">
             <span class="col-md-3 btn btn-info" ng-repeat="item in listaAnalisis track by $index"><label ng-click="mostrar($index, listaAnalisis, listaSubAnalisis)">{{item.tipoAnalisis.descripcion}}-({{item.cantidad}}) &nbsp;</label><i class="fa fa-remove" ng-click="remover($index, listaAnalisis)"></i></span>

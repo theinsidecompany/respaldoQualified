@@ -11,12 +11,12 @@
         <div class="col-md-12" style="margin-top: 5%;">
 
           <div class="col-md-12" style="margin-bottom: 1%;" ng-show="mostrarTipo">
-            <label class="col-md-3">N° Cotización</label>
-            <input class="col-md-3 form-control" ng-model="codigo" placeholder="N° Cotización">
-            <select class="form-control col-md-6" ng-model="retiro">
+            <span class="col-md-3"><label class="col-md-12">N° Cotización</label></span>
+            <span class="col-md-3"><input class="col-md-12 form-control" ng-model="codigo" placeholder="N° Cotización"></span>
+            <span class="col-md-6"><select class="form-control col-md-12" ng-model="retiro">
               <option value="muestreo">Muestreo</option>
               <option value="retiro">Retiro</option>
-            </select>
+            </select></span>
           </div>
 
           <div class="col-md-12" style="margin-bottom: 1%;" ng-show="!mostrarTipo">
@@ -28,7 +28,7 @@
           </div>
 
 
-          <div class="col-md-12" ng-show="mostrarTipo" >
+          <div class="col-md-12" ng-show="mostrarTipo" style="margin-bottom: 2%;">
             <div class="col-md-12">
               <label class="col-md-3">Tipo</label>
               <textarea class="col-md-9 form-control" ng-model="tipoMuestra" placeholder="Tipo"></textarea>
@@ -104,7 +104,7 @@
               <div class="col-md-12">
                 <button class="btn btn-primary" ng-disabled="!(!!pais && !!bodega && !!encargadoBodega && !!procedencia && !!toneladas &&tipoAceite && fabricante)"
                 ng-click="agregarAceite(retiroAnimal, composito, traders, pais, bodega, encargadoBodega, procedencia, toneladas, tipoAceite, fabricante, codigo, tipoMuestra)"
-                >Listo aceite</button>
+                >Agregar Aceite</button>
               </div>
             </div>
             <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -113,7 +113,7 @@
 
             <!-- Mostrar tipos de muestreo de Granos -->
             <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-md-12" ng-show="mostrarGranos">
+            <div ng-show="mostrarGranos">
               <div class="col-md-12" style="margin-top: 1%;">
                 <label class="col-md-3">Materia Prima</label>
                 <select class="form-control col-md-9" ng-model="materiaPrima" ng-change="listaTradersFiltro(materiaPrima)" ng-options="opt as opt.nombreMateriaPrima for opt in listarMateriaPrima">
@@ -138,14 +138,14 @@
                 <select class="col-md-9 form-control" ng-model="seleccionAlmacenaje">
                   <option value="" selected disabled style="display: none;">Seleccione Almacenaje</option>
                   <option value="granel">Granel</option>
-                  <option value="piso">A Psio</option>
+                  <option value="piso">A Piso</option>
                   <option value="silo">Silo</option>
                 </select>
               </div>
 
-              <div class="col-md-12">
+              <div class="col-md-12" style="margin-top: 2%;">
                 <button class="btn btn-primary" ng-click="agregarGranos(retiroAnimal, traders, pais, bodega, encargadoBodega, procedencia, toneladas, materiaPrima, trader, temperatura, seleccionAlmacenaje)"
-                >Listo grano</button>
+                >Agregar Grano</button>
               </div>
 
             </div>
@@ -162,7 +162,7 @@
             </select>
 
 
-            <button class="col-md-12 btn btn-primary" ng-click="agregarListaAnalisis(agua, listaTipoAnalisis)" style="margin-bottom: 1%;">Agregar</button>
+            <button class="col-md-12 btn btn-primary" ng-click="agregarListaAnalisis(agua, listaTipoAnalisis)" style="margin-bottom: 1%; margin-top: 2%;">Agregar Análisis</button>
 
             <div class="col-md-12">
               <span class="col-md-3 btn btn-info" ng-repeat="item in listaAnalisis track by $index"><label ng-click="mostrar($index, listaAnalisis)">{{item.tipoAnalisis}}-({{item.cantidad}}) &nbsp;</label><i class="fa fa-remove" ng-click="remover($index, listaAnalisis)"></i></span>
@@ -194,13 +194,13 @@
 
 
           <div class="col-md-12">
-            <button class="col-md-12 btn btn-primary" ng-click="agregarMuestreoAgua(codigo, retiro, tipoMuestra, listaAnalisis)" ng-show="muestraCrear">agregar Muestreo</button>
+            <button class="col-md-12 btn btn-primary" ng-click="agregarMuestreoAgua(codigo, retiro, tipoMuestra, listaAnalisis)" ng-show="muestraCrear">Agregar Muestreo</button>
           </div>
 
 
           <div class="col-md-12" ng-show="mostrarMuestreo">
             <button ng-disabled="!(!!codigo && !!tipoMuestra)" class="btn btn-primary" ng-click="agregarMuestreo(codigo, retiro, listaTipoAnalisis, tipoMuestra)"
-            >Listo muestra</button>
+            >Agregar Muestra</button>
           </div>
 
 

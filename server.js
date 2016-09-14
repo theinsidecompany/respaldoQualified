@@ -15,7 +15,7 @@ var HighchartsAnnotations = require('annotations');
 var conn = mongoose.connection;
 Grid.mongo = mongoose.mongo;
 // Configuracion localhost
-mongoose.connect('mongodb://localhost:27017/Tracefeed'); // Hacemos la conexión a la base de datos de Mongo con nombre "'mongodb://192.168.1.53:27017/Jony'"
+mongoose.connect('mongodb://192.168.1.53:27017/Tracefeed'); // Hacemos la conexión a la base de datos de Mongo con nombre "'mongodb://192.168.1.53:27017/Jony'"
 
 app.use(express.static(__dirname + '/angular'));
 app.use(logger('dev')); // activamos el log en modo 'dev'
