@@ -1,0 +1,265 @@
+<div class="scrollable modal col-lg-8 center-block" ui-if="modalVista" ui-state="modalVista">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable">
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 3%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalVista" ng-click="deshabilitarEdicion()">&times;</button>
+          <span ng-if="modalSolicitud.proceso[0].id_proceso < 3 "><label>Solicitud {{modalSol}}</label></span>
+          <span ng-if="modalSolicitud.proceso[0].id_proceso >=  3"><label>Orden de Trabajo {{modalSolicitud.id_orden_trabajo}}</label></span>
+        </div>
+
+        <center>
+          <div>
+            <label class="label-warning col-md-12">Solicitante</label>
+            {{modalCliente}}
+          </div>
+        </center>
+
+          <div class="col-md-4" style="margin-top: 1%;">
+            <div>
+              <label class="label-warning col-md-12">Fecha Creación:</label>
+              {{modalFecha | date:'dd/MM/yyyy - hh:mm'}}
+            </div>
+          </div>
+
+          <div class="col-md-4" style="margin-top: 1%;">
+            <div>
+              <label class="label-warning col-md-12">Fecha de Solicitud de Muestreo:</label>
+              {{modalFechaMuestreo | date:'dd/MM/yyyy'}}
+            </div>
+          </div>
+          <div class="col-md-4" style="margin-top: 1%;">
+            <div>
+              <label class="label-warning col-md-12">Fecha de Solicitud de Planificación:</label>
+              {{modalFechaPlanificacion | date:'dd/MM/yyyy'}}
+            </div>
+          </div>
+
+      </div>
+
+      <div class="container col-xs-12" ng-if="habilitar" style="margin-bottom: 2%;">
+        <div class="col-md-12" style="margin-bottom: 1%;">
+
+          <span class="col-md-1"><strong>Materia Prima</strong></span>
+          <select class="form-control col-md-2" ng-model="materiaPrima" ng-change="listaTradersFiltroPorId(materiaPrima)" ng-options="opt.id_materiaPrima as opt.nombreMateriaPrima for opt in listarMateriaPrima">
+          </select>
+
+          <span class="col-md-1"><strong>Proveedor</strong></span>
+          <select class="form-control col-md-2" ng-model="trader" ng-change="listarPais(listaTraders, trader)" ng-options="opt.nombreTrader as opt.nombreTrader for opt in listaTraders">
+          </select>
+
+          <span class="col-md-1"><strong>País</strong></span>
+          <select class="form-control col-md-2" ng-model="pais" ng-disabled="!(!!trader)" ng-options="opt.nombrePais as opt.nombrePais for opt in listarPaises">
+            <option value="" disabled selected style="display: none;">Seleccione Origen</option>
+          </select>
+
+          <span class="col-md-1"><strong>Bodega</strong></span>
+          <select class="form-control col-md-2" ng-model="bodega" ng-options="opt.nombreBodega as opt.nombreBodega for opt in listarBodegas">
+          </select>
+
+        </div>
+
+        <div class="col-md-12"  style="margin-bottom: 1%;">
+          <span class="col-md-1"><strong>Lote</strong></span>
+          <input type="text" class="form-control col-md-2"  ng-model="modalLote" placeholder="Lote">
+          <span class="col-md-1"><strong>Bultos</strong></span>
+          <input type="text" class="form-control col-md-2" onkeypress="return numeros(event)" ng-model="modalBulto" placeholder="Bulto">
+          <span class="col-md-1"><strong>Cantidad</strong></span>
+          <input type="text" class="form-control col-md-2" onkeypress="return numeros(event)" ng-model="modalCantidad" placeholder="Cantidad">
+          <span class="col-md-1"><strong>Contenedor</strong></span>
+          <input type="text" class="form-control col-md-2" ng-model="modalContenedor" placeholder="Contenedor">
+
+        </div>
+
+        <span class="col-md-4"></span>
+        <span class="col-md-2"><strong>Tipo Muestreo</strong></span>
+        <select class="form-control col-md-2" ng-model="muestreo" ng-options="opt.tipoMuestreo as opt.tipoMuestreo for opt in listaMuestreo">
+        </select>
+
+        <div class="col-xs-12" style="margin-top: 2%;">
+          <input type="hidden" ng-model="id_lote">
+          <span class="col-md-2"></span>
+          <button class="btn btn-success col-md-3" ng-click="modificarLote(id_lote, materiaPrima, trader, modalLote, modalBulto, modalCantidad, modalContenedor, bodega, modalSol, pais, muestreo, modalSolicitud)" uib-popover="Aceptar" popover-trigger="mouseenter"><i class="fa fa-check"></i></button>
+          <span class="col-md-2"></span>
+          <button class="btn btn-danger col-md-3" ng-click="habilitarEdicion()" uib-popover="Cancelar" popover-trigger="mouseenter"><i class="fa fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <center style="margin-top 2%;" ng-if="modalSolicitud.proceso[0].id_proceso < 3 "><h4><b>Detalle Solicitud</b></h4></center>
+      <center style="margin-top 2%;" ng-if="modalSolicitud.proceso[0].id_proceso >=  3"><h4><b>Detalle Orden de Trabajo</b></h4></center>
+
+      <div class="well window">
+       <div class="scrollable-content section wrapper" ui-scroll-bottom="loadMore()">
+
+        <div class="container col-xs-12" style="margin-bottom: 1%;">
+          <div ng-if="modalSolicitud.tipoMuestreo.id_muestreo == 1">
+            <div class="table-condensed col-xs-12 col-md-12">
+              <table class="table table-bordered">
+                <thead  style="background: #ffcc33;">
+                  <th class="col-md-1">Lote</th>
+                  <th class="col-md-1">Materia Prima</th>
+                  <th class="col-md-1">Proveedor</th>
+                  <th class="col-md-1">País</th>
+                  <th class="col-md-1">Bodega</th>
+                  <th class="col-md-1">Contenedor</th>
+                  <th class="col-md-1">Lote</th>
+                  <th class="col-md-1">N° Sacos</th>
+                  <th class="col-md-1">Kilos</th>
+                  <th class="col-md-1">Tipo Muestreo</th>
+                  <th class="col-md-1">Observaciones</th>
+                  <th class="col-md-1" ng-if="modalSolicitud.proceso[0].id_proceso < 8">Acción</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaLotesModal">
+                    <td>{{item.lote}}</td>
+                    <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                    <td>{{item.trader.nombreTrader}}</td>
+                    <td>{{item.paisTrader.nombrePais}}</td>
+                    <td>{{item.bodega.nombreBodega}}</td>
+                    <td>{{item.contenedor}}</td>
+                    <td>{{item.lote}}</td>
+                    <td>{{item.bultos}}</td>
+                    <td>{{item.cantidad}}</td>
+                    <td>{{item.tipoMuestreo.descripcion}}</td>
+                    <td ng-if="item.observaciones == true"><center><button class="btn btn-danger"  ui-turn-on="modalObservacion" ng-click="enviarObservacionModal(modalSolicitud, item.id_lote)" uib-popover="Observacion" popover-trigger="mouseenter"><i class="fa fa-comment"></i></button></center></td>
+                    <td ng-if="item.observaciones == undefined"><center><button class="btn btn-warning"  ui-turn-on="modalObservacion" ng-click="enviarObservacionModal(modalSolicitud, item.id_lote)" uib-popover="Observacion" popover-trigger="mouseenter"><i class="fa fa-comment"></i></button></center></td>
+                    <td ng-if="modalSolicitud.proceso[0].id_proceso < 8">
+                      <button class="btn btn-info col-md-6" ng-click="setearValoresMod(item, modalFechaMuestreo, modalSolicitud)" uib-popover="Modificar" popover-trigger="mouseenter"><i class="fa fa-edit"></i></button>
+                      <button class="btn btn-danger col-md-6" ng-click="eliminarLoteSolicitud(item.id_lote, modalSol, listaLotesModal)" uib-popover="Eliminar" popover-trigger="mouseenter"><i class="fa fa-remove"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="table-condensed col-xs-12 col-md-12" ng-if="modalSolicitud.tipoMuestreo.id_muestreo == 2">
+            <table class="table table-bordered">
+              <thead style="background: #ffcc33;">
+                <th>Codigo</th>
+                <th>Retiro/Muestreo</th>
+                <th>Obserbaciones</th>
+                <th>Analisis</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in listaLotesModal">
+                  <td>{{item.codigo}}</td>
+                  <td>{{item.retiro}}</td>
+                  <td>{{item.tipo}}</td>
+                  <td>{{item.listaDescripcion}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col-xs-12 col-md-12" ng-if="modalSolicitud.tipoMuestreo.id_muestreo > 2 && modalSolicitud.tipoMuestreo.id_muestreo < 7">
+            <div class="table-condensed col-xs-12 col-md-12">
+              <table class="table table-bordered">
+                <thead style="background: #ffcc33;">
+                  <th>Codigo</th>
+                  <th>Retiro/Muestreo</th>
+                  <th>Observaciones</th>
+                  <th>Analisis</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaLotesModal">
+                    <td>{{item.codigo}}</td>
+                    <td>{{item.retiro}}</td>
+                    <td>{{item.tipo}}</td>
+                    <td>{{item.listaDescripcion}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-md-12" ng-if="modalSolicitud.tipoMuestreo.id_muestreo == 8">
+            <div class="table-condensed col-xs-12 col-md-12">
+              <table class="table table-bordered">
+                <thead style="background: #ffcc33;">
+                  <th>Retiro/Muestreo</th>
+                  <th>Trader</th>
+                  <th>Origen</th>
+                  <th>Bodega</th>
+                  <th>Encargado Bodega</th>
+                  <th>Planta Procedencia</th>
+                  <th>Toneladas</th>
+                  <th>Materia Prima</th>
+                  <th>Proveedor</th>
+                  <th>Temperatura</th>
+                  <th>Tipo Almacenaje</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaLotesModal">
+                    <td>{{item.retiro}}</td>
+                    <td>{{item.traders.nombre}}</td>
+                    <td>{{item.origen.nombrePais}}</td>
+                    <td>{{item.bodega.nombreBodega}}</td>
+                    <td>{{item.encargadoBodega}}</td>
+                    <td>{{item.procedencia}}</td>
+                    <td>{{item.toneladas}}</td>
+                    <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                    <td>{{item.trader.nombreTrader}}</td>
+                    <td>{{item.temperatura}}</td>
+                    <td>{{item.seleccionAlmacenaje}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-md-12" ng-if="modalSolicitud.tipoMuestreo.id_muestreo == 7">
+            <div class="table-condensed col-xs-12 col-md-12">
+              <table class="table table-bordered">
+                <thead style="background: #ffcc33;">
+                  <th>Retiro/Muestreo</th>
+                  <th>Composito</th>
+                  <th>Estrato</th>
+                  <th>Trader</th>
+                  <th>Origen</th>
+                  <th>Bodega</th>
+                  <th>Encargado Bodega</th>
+                  <th>Planta Procedencia</th>
+                  <th>Toneladas</th>
+                  <th>Tipo Aceite</th>
+                  <th>Fabricante</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaLotesModal">
+                    <td>{{item.retiro}}</td>
+                    <td ng-if=" item.composito == undefined || item.composito == false">N/A</td>
+                    <td ng-if=" item.composito != undefined && item.composito != false">OK</td>
+                    <td ng-if="item.estrato == null">N/A</td>
+                    <td ng-if="item.estrato != null">{{item.descripcionEstrato}}</td>
+                    <td>{{item.traders.nombre}}</td>
+                    <td>{{item.origen.nombrePais}}</td>
+                    <td>{{item.bodega.nombreBodega}}</td>
+                    <td>{{item.encargadoBodega}}</td>
+                    <td>{{item.procedencia}}</td>
+                    <td>{{item.toneladas}}</td>
+                    <td>{{item.tipoAceite}}</td>
+                    <td>{{item.fabricante}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+        <div class="modal-footer">
+
+          <div id="pdfVer" ng-show="false">
+            <embed ng-src="{{content}}" style="width:100%;height:100%;">
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

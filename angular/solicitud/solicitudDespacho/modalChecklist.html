@@ -1,0 +1,127 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalChecklist' ui-state='modalChecklist'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 2%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalChecklist">&times;</button>
+          <label>Checklist</label>
+        </div>
+
+
+        <div class="col-md-12">
+          <span class="col-md-8 col-xs-6"><strong><h4>1. Limpieza: Indique el nivel de limpieza del vehiculo</h4></strong></span>
+          <span class="col-md-2 col-xs-3"><label>SI</label></span>
+          <span class="col-md-2 col-xs-3"><label>NO</label></span>
+        </div>
+
+        <div class="col-md-12">
+          <span class="col-xs-12">
+            <span class="col-md-8 col-xs-6">
+              <span>1.1 Vehiculo posee filtraciones de aceite</span>
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.filtraAceite" checked="habilitaFiltraAceite" ng-disabled="denegar" name="filtraAceite" value="true">
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.filtraAceite" checked="!habilitaFiltraAceite" ng-disabled="denegar" name="filtraAceite" value="false">
+            </span>
+          </span>
+
+          <span class="col-xs-12">
+            <span class="col-md-8 col-xs-6">
+              <span>1.2 Vehiculo posee filtraciones de petroleo</span>
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.filtraPetroleo" checked="habilitaFiltraPetroleo" ng-disabled="denegar" name="filtraPetroleo" value="true">
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.filtraPetroleo" checked="!habilitaFiltraPetroleo" ng-disabled="denegar" name="filtraPetroleo" value="false">
+            </span>
+          </span>
+
+          <span class="col-xs-12">
+            <span class="col-md-8 col-xs-6">
+              <span>1.3 La rampla se encuentra con desechos de algún tipo</span>
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.ramplaLimpia" checked="habilitaRamplaLimpia" ng-disabled="denegar" name="rampla" value="true">
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.ramplaLimpia" checked="!habilitaRamplaLimpia" ng-disabled="denegar" name="rampla" value="false">
+            </span>
+          </span>
+
+
+          <span class="col-xs-12">
+            <span class="col-md-8 col-xs-6">
+              <span>1.4 Los neumáticos se encuentran con residuos </span>
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.neumatico" checked="habilitaNeumatico" ng-disabled="denegar" name="neumatico" value="true">
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.neumatico" checked="!habilitaNeumatico" ng-disabled="denegar" name="neumatico" value="false">
+            </span>
+          </span>
+
+          <span class="col-xs-12">
+            <span class="col-md-6">
+              <span>1.5 Indique las 3 ultimas cargas realizadas</span>
+            </span>
+            <span class="col-md-2">
+              <input class="form-control"ng-disabled="denegar" ng-model="checklist.carga1">
+            </span>
+            <span class="col-md-2">
+              <input class="form-control"ng-disabled="denegar" ng-model="checklist.carga2">
+            </span>
+            <span class="col-md-2">
+              <input class="form-control"ng-disabled="denegar" ng-model="checklist.carga3">
+            </span>
+          </span>
+
+        </div>
+
+        <div class="col-md-12 espacio">
+          <span class="col-md-8 col-xs-6"><h4>2. Desinfección: Indique el nivel del procedimeiento de desinfección</h4></span>
+          <span class="col-md-2 col-xs-3"><label>SI</label></span>
+          <span class="col-md-2 col-xs-3"><label>NO</label></span>
+
+          <span class="col-xs-12">
+            <span class="col-md-8 col-xs-6">
+              <span>2.1 Se realiza inspeccion de la rampla utilizando un aspersor con solucion de cloro al 30% impregnando toda la superficie de la rampla</span>
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.ramplaDesinfecta" checked="habilitaRamplaDesinfecta" ng-disabled="denegar" name="ramplaDesinfectada" value="true">
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.ramplaDesinfecta" checked="!habilitaRamplaDesinfecta" ng-disabled="denegar" name="ramplaDesinfectada" value="false">
+            </span>
+          </span>
+
+          <span class="col-xs-12">
+            <span class="col-md-8 col-xs-6">
+              <span>2.2 Se da un tiempo necesario para que el desinfectante actue sobre la superficie de la rampla antes de cargar</span>
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.ramplaTiempo" checked="habilitaRamplaTiempo" ng-disabled="denegar" name="tiempo" value="true">
+            </span>
+            <span class="col-md-2 col-xs-3">
+              <input type="radio" ng-model="checklist.ramplaTiempo" checked="!habilitaRamplaTiempo" ng-disabled="denegar" name="tiempo" value="false">
+            </span>
+          </span>
+
+        </div>
+
+        <span class="col-md-12">
+          <span class="col-md-4 col-xs-8"></span>
+          <button class="col-md-4 col-xs-4 btn btn-info" ng-show="!denegar" ui-turn-off="modalChecklist" ng-click="guardarChecklist(checklist)">Guardar</button>
+          <span class="col-md-4"></span>
+        </span>
+
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

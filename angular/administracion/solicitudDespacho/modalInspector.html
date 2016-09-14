@@ -1,0 +1,34 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalInspector' ui-state='modalInspector'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalInspector">&times;</button>
+          <label>Asignar</label>
+        </div>
+        <div class="col-xs-12 text-center">
+          <label style="margin-bottom: 3%;">Asignación de Inspector</label>
+          <br>
+
+          <div class="col-xs-12" style="margin-bottom: 2%;">
+            <div class="col-xs-3">
+              <label>Seleccione Inspector</label>
+            </div>
+            <div class="col-xs-8">
+              <select class="form-control col-xs-6" ng-model="inspector" style="margin-bottom: 3%;" ng-options="opt as opt.nombre for opt in inspectores">
+                <option value="" disabled selected style="display: none;">Seleccione Inspector</option>
+              </select><br>
+            </div>
+          </div>
+
+          <span class="col-xs-2"></span>
+          <button class="btn btn-warning col-xs-3" ng-disabled="!(!!inspector)" ng-click="AsignarInspector(inspector, solicitud)" ui-turn-off="modalInspector">Asignar Inspector</button><br>
+          <button class="btn btn-danger col-xs-3" ui-turn-off="modalInspector" style="margin-left: 10%;">Cancelar</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

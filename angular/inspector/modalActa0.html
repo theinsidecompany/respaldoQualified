@@ -1,0 +1,79 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalActaHarina' ui-state='modalActaHarina'>
+    <div class="modal-backdrop in"></div>
+    <div class="scrollable-content modal-dialog">
+        <div class="modal-content">
+            <div class="container col-xs-12" style="margin-bottom: 5%;">
+                <div class="modal-header">
+                    <button class="close" ui-turn-off="modalActaHarina">&times;</button>
+                    <label>Acta de muestreo</label>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="envoltorio">
+                        <table class="table table-bordered top">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">
+                                        <span class="col-md-12">
+                                    <img src="resource\img\logo_menu.png" style="float: left;">
+                                    <span class="col-md-12"><center>Acta de Muestreo</center></span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-4">Empresa Solicitante/Cliente</td>
+                                    <td class="col-md-8 text-center">{{modalSolicitud.cliente.nombre}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-3">Lugar de Muestreo/Bodega</td>
+                                    <td class="col-md-9 text-center">{{listaImpresion[0].bodega.nombreBodega}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-3">Trader Intermediario</td>
+                                    <td class="col-md-9 text-center">{{listaImpresion[0].trader.nombreTrader}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-3">Muestreador Qualified</td>
+                                    <td class="col-md-9 text-center">{{modalSolicitud.encargado}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-3">Destino Analisis</td>
+                                    <td class="col-md-9 text-center">{{destinoAnalisis}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="envoltorio">
+                        <table class="table table-bordered top" >
+                            <thead>
+                                <th class="col-md-3 col-xs-3">Identificador del Lote y/o Contenedor</th>
+                                <th class="col-md-1 col-xs-1">Tipo de Producto</th>
+                                <th class="col-md-1 col-xs-1">N° de Sacos</th>
+                                <th class="col-md-1 col-xs-1">KG del Lote</th>
+                                <th class="col-md-1 col-xs-1">Fabricante</th>
+                                <th class="col-md-1 col-xs-1">Origen</th>
+                                <th class="col-md-2 col-xs-2">Codigo de Sellos del Lote</th>
+                                <th class="col-md-2 col-xs-2">Codigo de Sellos del Muestreo</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in listaImpresion">
+                                    <td>{{item.lote}}</td>
+                                    <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                                    <td>{{item.bultos}}</td>
+                                    <td>{{item.cantidad}}</td>
+                                    <td>{{item.trader.nombreTrader}}</td>
+                                    <td>{{item.paisTrader.nombrePais}}</td>
+                                    <td>{{item.sellos[0]}} hasta {{item.sellos[item.sellos.length - 1]}}</td>
+                                    <td>{{item.sellos[0]}} hasta {{item.sellos[item.sellos.length - 1]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<div ui-content-for="title">
+  <span>Solicitudes</span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div class="col-md-3" style="margin-bottom: 2%;">
+      <input class="form-control" placeholder="Búsqueda.." ng-model="busqueda"/>
+    </div>
+
+    <div class="col-md-3" style="margin-bottom: 2%;">
+      <select class="form-control" ng-model="filtroEstado">
+        <option value="">Seleccione Estado..</option>
+        <option value="En proceso">En proceso</option>
+        <option value="En aprobacion">En Aprobación</option>
+        <option value="Finalizado">Finalizado</option>
+      </select>
+    </div>
+
+    <div class="col-md-3" style="margin-bottom: 2%;">
+      <select class="form-control" ng-model="tipoMuestreo" ng-options="opt as opt.descripcion for opt in listaMuestreo">
+        <option disabled selected value="" style="display: none;">Seleccione Tipo Muestreo</option>
+      </select>
+    </div>
+
+    <div class="col-md-3" style="margin-bottom: 2%;">
+      <span class="btn btn-primary" ng-click="redirigirCreacion(tipoMuestreo)">Nueva Solicitud</span>
+    </div>
+
+    <div class="envoltorio col-md-12">
+      <div class="table-condensed" style="margin-top: 1%;">
+        <table class="table table-bordered">
+          <thead style="background: #ffcc33; width: 80%;">
+            <th>N°</th>
+            <th>Estado</th>
+            <th>Tipo Solicitud</th>
+            <th>Fecha Creación</th>
+            <th>Fecha de Solicitud de Muestreo</th>
+            <th>Fecha de Planificación</th>
+            <th>Acción</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="sol in solicitudes | filter: busqueda | filter: filtroEstado | filter: filtroProceso | orderBy : 'id_solicitud_cliente'">
+              <td>{{sol.id_solicitud_cliente}}</td>
+              <td>{{sol.estado}}</td>
+              <td>{{sol.tipoMuestreo.descripcion}}</td>
+              <td>{{sol.fecha_creacion| date:'dd/MM/yyyy - hh:mm'}}</td>
+              <td>{{sol.fecha_muestreo| date:'dd/MM/yyyy'}}</td>
+              <td ng-if="sol.fecha_planificacion == null">No asignada</td>
+              <td ng-if="sol.fecha_planificacion != null">{{sol.fecha_planificacion| date:'dd/MM/yyyy'}}</td>
+              <td>
+                <span class="btn-group">
+                  <button class="btn btn-info" ui-turn-on="modalVista" ng-click="enviarVistaModal(sol)" uib-popover="Ver" popover-trigger="mouseenter"><i class="fa fa-eye"></i></button>
+                  <button class="btn btn-info" ui-turn-on="modalMensaje" ng-click="enviarMensajeModal(sol)"uib-popover="Mensaje" popover-trigger="mouseenter"><i class="fa fa-envelope"></i></button>
+                  <span class="btn-group" ng-if="sol.proceso[0].id_proceso == 12">
+                    <button class="btn btn-warning" ui-turn-on="modalRecepcion" ng-click="enviarRecepcion(sol)" uib-popover="Confirmar" popover-trigger="mouseenter"><i class="fa fa-file-text"></i></button>
+                  </span>
+                  <span class="btn-group" ng-if="sol.proceso[0].id_proceso <= 2">
+                    <button class="btn btn-danger" ui-turn-on="modalEliminar" ng-click="eliminarModal(sol)" uib-popover="Cancelar" popover-trigger="mouseenter"><i class="fa fa-remove"></i></button>
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <div ui-content-for="modals">
+      <div ng-include="'solicitud/busquedaSolicitud/modalMensaje.html'"></div>
+      <div ng-include="'solicitud/busquedaSolicitud/modalEliminar.html'"></div>
+      <div ng-include="'solicitud/busquedaSolicitud/modalVista.html'"></div>
+      <div ng-include="'solicitud/busquedaSolicitud/modalLote.html'"></div>
+      <div ng-include="'solicitud/busquedaSolicitud/modalRecepcion.html'"></div>
+      <div ng-include="'solicitud/busquedaSolicitud/modalObservacion.html'"></div>
+      <div ng-include="'modalAvisos/mensajeAvisos.html'"></div>
+    </div>
+  </div>
+</div>

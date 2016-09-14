@@ -1,0 +1,126 @@
+<div ui-content-for="title">
+  <span>Nueva Solicitud Harinas</span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div class="col-md-12">
+      <div class="col-md-6" style="margin-top: 2%;">
+
+        <div class="col-md-12" style="margin-bottom: 2%;">
+          <div class="col-md-4">
+            <label>Fecha Creación</label>
+          </div>
+          <div>
+            <div class="col-md-8">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_creacion" ng-disabled="true" ng-required="true"/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-disabled="true"><i class="fa fa-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12" style="margin-bottom: 2%;">
+          <div class="col-md-4">
+            <label>Fecha de Solicitud de Muestreo</label>
+          </div>
+          <div>
+            <div class="col-md-8">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_muestreo" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="col-md-4" style="margin-bottom: 8%;">
+            <button class="btn btn-primary col-xs-12 col-md-12" ui-turn-on="modalLote">Agregar Nuevo Item</button>
+          </div>
+          <div class="col-md-4" >
+            <button class="btn btn-primary col-xs-12 col-md-12" ng-click="agregarSolicitud(fecha_muestreo)">Enviar Solicitud</button>
+          </div>
+          <div class="col-md-4" >
+
+
+
+            <center>
+              <form name="myForm">
+                <center>
+                  <span class="btn-group">
+                    <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)" class="btn btn-success"><i class="fa fa-upload"></i></button>
+                    <div class="fileUpload btn btn-info">
+                      <i class="fa fa-file-image-o"></i>
+                      <input type="file" class="upload" ngf-select ng-model="picFile" name="file"
+                              gf-max-size="40MB" required
+                      ngf-model-invalid="errorFile">
+                    </div>
+                    <button ng-click="picFile = null" ng-show="picFile" class="btn btn-danger"><i class="fa fa-remove"></i></button>
+                    <a class="btn btn-primary" href="src\MatrizLotes.xlsx" download>Formulario</a>
+                  </span>
+
+                  <span class="progress" ng-show="picFile.progress >= 0">
+                    <div style="width:{{picFile.progress}}%"
+                    ng-bind="picFile.progress + '%'"></div>
+                  </span>
+                  <span ng-show="picFile.result">Éxito</span>
+                  <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+
+                </center>
+              </form>
+            </center>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <center><h3><b>Detalle Solicitud</b><h3></center>
+
+      <div class="table-condensed col-xs-12 col-md-12">
+        <table class="table table-bordered">
+          <thead style="background: #ffcc33;">
+            <th>Id</th>
+            <th>Materia Prima</th>
+            <th>Proveedor</th>
+            <th>País</th>
+            <th>Lote</th>
+            <th>N° Sacos</th>
+            <th>Cantidad</th>
+            <th>Contenedor</th>
+            <th>Bodega</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in listaLotes">
+              <td>{{item.id_lote}}</td>
+              <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+              <td>{{item.trader.nombreTrader}}</td>
+              <td>{{item.paisTrader.nombrePais}}</td>
+              <td>{{item.lote}}</td>
+              <td>{{item.bultos}}</td>
+              <td>{{item.cantidad}}</td>
+              <td>{{item.contenedor}}</td>
+              <td>{{item.bodega.nombreBodega}}</td>
+              <td><i class="fa fa-remove" ng-click="removerLote(item.id_lote)"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div ui-content-for="modals">
+        <div ng-include="'solicitud/crearSolicitud/modalLote.html'"></div>
+        <div ng-include="'modalAvisos/mensajeAvisos.html'"></div>
+      </div>
+    </div>
+  </div>

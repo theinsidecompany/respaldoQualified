@@ -1,0 +1,22 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if="modalNoApruebaTransporte" ui-state="modalNoApruebaTransporte">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalNoApruebaTransporte">&times;</button>
+          <label>No aprueba Transporte</label>
+        </div>
+        <div class="col-xs-12 text-center" style="margin-top: 2%;">
+          <h4>Observaciones</h4>
+          <span class="col-md-1"></span>
+          <textarea class="form-control" style="width: 80%; height: 100%;" ng-model="observaciones"> </textarea><br>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning col-xs-3"  style="margin-left: 20%;" ng-disabled="!(!!observaciones)" ng-click="desaprovarTransporte(modalSol, observaciones)" ui-turn-off="modalNoApruebaTransporte">Desaprobar</button>
+        <button class="btn btn-danger col-xs-3" ui-turn-off="modalNoApruebaTransporte" style="margin-left: 10%;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

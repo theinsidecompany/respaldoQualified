@@ -1,0 +1,53 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalIngreso' ui-state='modalIngreso'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 2%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalIngreso">&times;</button>
+          <label>Solicitud de Despacho {{id_solicitud}}</label>
+        </div>
+
+        <span class="col-md-12 espacio">
+          <label class="col-md-3 col-xs-12">Cliente: </label>
+          <label class="col-md-9 col-xs-12">{{cliente}}</label>
+        </span>
+
+        <span class="col-md-12 espacio">
+          <label class="col-md-3 col-xs-12">Lotes: </label>
+          <label class="col-md-9 col-xs-12">{{lotes}}</label>
+        </span>
+
+        <span class="col-md-12 espacio">
+          <label class="col-md-3 col-xs-12">Contenedores: </label>
+          <label class="col-md-9 col-xs-12">{{contenedores}}</label>
+        </span>
+
+        <span class="col-md-12 espacio">
+          <label class="col-md-3 col-xs-12">Lugar de Inspección: </label>
+          <label class="col-md-9 col-xs-12">{{bodegas}}</label>
+        </span>
+
+        <span class="col-md-12 espacio">
+          <label class="col-md-3 col-xs-12">N° Sellos: </label>
+          <label class="col-md-9 col-xs-12">{{sellos}} / {{cont}}</label>
+        </span>
+
+
+        <span class="col-md-12 espacio">
+          <span class="col-md-9 col-xs-9">
+            <span ng-repeat="item in listaCamiones">
+              <button class="btn btn-success"  ui-turn-on="modalVistaCamion" ng-click="modalVisualizacionCamion(item, $index, lotes, contenedores, bodegas, cliente)"><i class="fa fa-truck"></i></button>
+            </span>
+          </span>
+          <button class="btn btn-info col-md-3 col-xs-3" ui-turn-on="modalCamion" ng-if="sellos != cont" ng-click="enviarDatosTransporte(listalotesCamion, asignados)" ><i class="fa fa-truck"></i></button>
+        </span>
+
+
+
+      </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>

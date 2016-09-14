@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<div class="scrollable modal col-lg-7 center-block" ui-if="modalSellos" ui-state="modalSellos">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalSellos" >&times;</button>
+          <label>Sellos</label>
+        </div>
+        <div class="col-xs-12 text-center">
+
+          <div class="col-md-5">
+
+            <input class="form-control top" placeholder="Busqueda" ng-model="busqueda">
+
+            <label class="col-md-6 top" style="background: #ffcc33;">Rango</label>
+            <input class="col-md-6" style="margin-top:5%;" ng-click="reiniciarValores(sellosUtilizado)" type="checkbox" ng-model="check">
+            <span class="col-md-12"></span>
+            <label class="col-md-6 top" style="background: #ffcc33;">Asignar</label>
+            <input class="form-control col-md-6 top" ng-disabled="!check" ng-model="desde">
+
+            <label class="col-md-12 top" style="background: #ffcc33;">Sellos Disponibles</label>
+            <select class="form-control top" multiple ng-disabled="check" style="height: 200px; width: 100%;" ng-model="sellosSeleccionInspector" ng-options="opt as opt for opt in sellosInspector | filter: busqueda">
+              <option value="" disabled selected style="display: none;">Seleccione Sellos</option>
+            </select>
+
+          </div>
+
+
+          <div class="col-md-2" style="margin-top: 25%;">
+            <span class="col-md-3"></span>
+            <button class="btn btn-success col-md-6" ng-click="usarSellos(modalSol, lote.id_lote, sellosInspector, sellosSeleccionInspector, desde, lote.bultos, asignados, lote.sellos, check, sellosUtilizados)"><i class="fa fa-arrow-right"></i></button>
+            <span class="col-md-3"></span>
+            <span class="col-md-12"></span>
+            <span class="col-md-3"></span>
+            <button class="btn btn-danger col-md-6" ng-disabled="!(!!sellosUtilizado)" ng-click="restarSellos(sellosInspector, sellosUtilizado, sellosUtilizados, asignados, lote.id_lote, lote.bultos)"><i class="fa fa-arrow-left"></i></button>
+            <span class="col-md-3"></span>
+          </div>
+
+
+          <div class="col-md-5 top">
+
+            <label class="col-md-6" style="background: #ffcc33;">Orden de Trabajo</label>
+            <label class="col-md-6">{{modalSol.id_orden_trabajo}}</label>
+            <label class="col-md-6" style="background: #ffcc33;">Item</label>
+            <label class="col-md-6">{{lote.id_lote}}</label>
+            <label class="col-md-6" style="background: #ffcc33;">N° Sacos</label>
+            <label class="col-md-6">{{lote.bultos}}</label>
+            <label class="col-md-6" style="background: #ffcc33;">Asignados</label>
+            <label class="col-md-6 label-{{colorAsignado}}">{{asignados}}</label>
+            <label class="col-md-12" style="margin-top: 8%; background: #ffcc33;">Sellos Asignados a Item</label>
+
+            <select class="form-control" multiple style="height: 200px; width: 100%;" ng-model="sellosUtilizado" ng-options="opt as opt for opt in sellosUtilizados">
+              <option value="" disabled selected style="display: none;">Seleccione Sellos</option>
+            </select>
+
+          </div>
+
+
+          <div class="col-md-12 top">
+            <span class="col-md-4"></span>
+            <button class="btn btn-success col-md-1" ui-turn-off="modalSellos"  ng-click="guardarCambios(lote, sellosUtilizados, asignados, modalSol, sellosInspector)"><i class="fa fa-check"></i></button>
+            <span class="col-md-2"></span>
+            <button class="btn btn-danger col-md-1" ui-turn-off="modalSellos" ng-click="reiniciarModal()"><i class="fa fa-remove"></i></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

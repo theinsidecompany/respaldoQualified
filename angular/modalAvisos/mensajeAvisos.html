@@ -1,0 +1,91 @@
+
+<div class="scrollable modal col-lg-6 center-block" ui-if='mensajeAvisos' ui-state='mensajeAvisos' ng-controller="MainController">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="mensajeAvisos">&times;</button>
+        </div>
+        <!-- Mostrar modal vista  -->
+        <div ng-show="vista">
+          <center>
+              <b class="label-warning col-md-12">Solicitante</b>
+          </center>
+          <center>
+                {{datosAvisosNombre}}
+          </center>
+
+          <span class="col-md-1"></span>
+
+          <div class="col-md-5" style="margin-top: 1%;">
+            <div>
+              <b class="label-warning col-md-12">Fecha Creación:</b>
+              {{datosAvisos.fecha_creacion | date:'dd/MM/yyyy - hh:mm'}}
+            </div>
+          </div>
+          <div class="col-md-5" style="margin-top: 1%;">
+            <div>
+              <b class="label-warning col-md-12">Fecha de Planificación:</b>
+              {{datosAvisos.fecha_planificacion | date:'dd/MM/yyyy - hh:mm'}}
+            </div>
+          </div>
+
+          <div class="col-md-12"><center style="margin-top 2%;"><h4><b>Detalle Solicitud</b><h4></center></div>
+            <div class="container col-xs-12" style="margin-bottom: 1%;">
+              <div class="table-condensed col-xs-12 col-md-12">
+                <table class="table table-bordered">
+                  <thead  style="background: #ffcc33;">
+                    <th class="col-md-1">Materia Prima</th>
+                    <th class="col-md-1">Proveedor</th>
+                    <th class="col-md-1">País</th>
+                    <th class="col-md-1">Bodega</th>
+                    <th class="col-md-1">Contenedor</th>
+                    <th class="col-md-1">Lote</th>
+                    <th class="col-md-1">N° Sacos</th>
+                    <th class="col-md-1">Cantidad</th>
+                    <th class="col-md-1">Tipo Muestreo</th>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in datosAvisos.lote">
+                      <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                      <td>{{item.trader.nombreTrader}}</td>
+                      <td>{{item.paisTrader.nombrePais}}</td>
+                      <td>{{item.bodega.nombreBodega}}</td>
+                      <td>{{item.contenedor}}</td>
+                      <td>{{item.lote}}</td>
+                      <td>{{item.bultos}}</td>
+                      <td>{{item.cantidad}}</td>
+                      <td>{{item.tipoMuestreo.tipoMuestreo}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mostrar modal mensajeria -->
+          <div ng-show="mensaje">
+            <table class="table table-condensed">
+              <thead style="background-color: #ffcc33 ">
+                <th>Mensaje</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="msj in datosAvisos.mensaje">
+                  <td>Mensaje: {{msj.contenido}} </td>
+                  <td>De:      {{msj.emisor}} <br>
+                    Perfil:  {{msj.cargo}} <br>
+                    Fecha:   {{msj.fecha | date: 'dd/MM/yyyy - hh:mm'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+
+      </div>
+    </div>
+  </div>

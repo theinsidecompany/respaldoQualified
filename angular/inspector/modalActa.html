@@ -1,0 +1,304 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalActa' ui-state='modalActa'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalActa">&times;</button>
+          <label>Acta de muestreo</label>
+        </div>
+        <div class="col-md-12" id="acta">
+
+          <div class="envoltorio" ng-if="habilitaHarina">
+            <table class="table table-bordered top">
+              <thead>
+                <tr>
+                  <th colspan="2">
+                    <span class="col-md-12">
+                      <img src="resource\img\logo_menu.png" style="float: left;">
+                      <span class="col-md-12"><center>Acta de Muestreo</center></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="col-md-4">Empresa Solicitante/Cliente</td>
+                    <td class="col-md-8 text-center">{{modalSolicitud.cliente.nombre}}</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-3">Lugar de Muestreo/Bodega</td>
+                    <td class="col-md-9 text-center">{{listaImpresion[0].bodega.nombreBodega}}</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-3">Trader Intermediario</td>
+                    <td class="col-md-9 text-center">{{listaImpresion[0].trader.nombreTrader}}</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-3">Muestreador Qualified</td>
+                    <td class="col-md-9 text-center">{{modalSolicitud.encargado}}</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-3">Destino Analisis</td>
+                    <td class="col-md-9 text-center">{{destinoAnalisis}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="envoltorio" ng-if="habilitaHarina">
+              <table class="table table-bordered top" >
+                <thead>
+                  <th class="col-md-3 col-xs-3">Identificador del Lote y/o Contenedor</th>
+                  <th class="col-md-1 col-xs-1">Tipo de Producto</th>
+                  <th class="col-md-1 col-xs-1">N° de Sacos</th>
+                  <th class="col-md-1 col-xs-1">KG del Lote</th>
+                  <th class="col-md-1 col-xs-1">Fabricante</th>
+                  <th class="col-md-1 col-xs-1">Origen</th>
+                  <th class="col-md-2 col-xs-2">Codigo de Sellos del Lote</th>
+                  <th class="col-md-2 col-xs-2">Codigo de Sellos del Muestreo</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaImpresion">
+                    <td>{{item.lote}}</td>
+                    <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                    <td>{{item.bultos}}</td>
+                    <td>{{item.cantidad}}</td>
+                    <td>{{item.trader.nombreTrader}}</td>
+                    <td>{{item.paisTrader.nombrePais}}</td>
+                    <td>{{item.sellos[0]}} hasta {{item.sellos[item.sellos.length - 1]}}</td>
+                    <td>{{item.sellos[0]}} hasta {{item.sellos[item.sellos.length - 1]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="envoltorio" ng-if="habilitaMuestra" style="margin-top: 3%;">
+              <img src="resource\img\logo_menu.png" style="float: left;"> <center><strong>Fecha: 22/22/2016</strong></center>
+              <table class="table table-bordered top">
+                <thead style="background: #ffcc33;">
+                  <tr>
+                    <th colspan="2">
+                      <span class="col-md-12">
+                        <span class="col-md-12"><center>Antecedentes del Cliente</center></span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="col-md-4">Cliente/Razon Social</td>
+                      <td class="col-md-8 text-center">{{solicitud.cliente.nombre}}</td>
+                    </tr>
+                    <tr>
+                      <td class="col-md-3">Rut</td>
+                      <td class="col-md-9 text-center">{{solicitud.cliente.rut}}</td>
+                    </tr>
+                    <tr>
+                      <td class="col-md-3">Giro</td>
+                      <td class="col-md-9 text-center">{{solicitud.cliente.giro}}</td>
+                    </tr>
+                    <tr>
+                      <td class="col-md-3">Direccion</td>
+                      <td class="col-md-9 text-center">{{solicitud.cliente.direccion}}</td>
+                    </tr>
+                    <tr>
+                      <td class="col-md-3">Contacto(indicar cargo)</td>
+                      <td class="col-md-9 text-center"></td>
+                    </tr>
+                    <tr>
+                      <td class="col-md-3">Email envio de informes</td>
+                      <td class="col-md-9 text-center">{{correoCliente}}</td>
+                    </tr>
+                    <tr>
+                      <td class="col-md-3">Fecha</td>
+                      <td class="col-md-9 text-center">{{fecha_actual | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="envoltorio" ng-if="habilitaMuestra">
+                <table class="table table-bordered top" >
+                  <thead style="background: #ffcc33;">
+                    <th class="col-md-3 col-xs-3">Matriz Tipo de Producto</th>
+                    <th class="col-md-3 col-xs-3">Clave Identificacion de la Muestra</th>
+                    <th class="col-md-3 col-xs-3">Analisis</th>
+                    <th class="col-md-3 col-xs-3">N° Muestras</th>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in listaLotesMuestra">
+                      <td>{{solicitud.tipoMuestreo.descripcion}}</td>
+                      <td>{{item.codigo}}</td>
+                      <td>{{item.listaDescripcion}}</td>
+                      <td>{{item.nroMuestras}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table class="table table-bordered top">
+                  <thead style="background: #ffcc33;">
+                    <tr>
+                      <th colspan="2">
+                        <span class="col-md-12">
+                          <span class="col-md-12"><center>Antecedentes del Muestreo</center></span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="col-md-4">Nombre y Firma del Muestreador</td>
+                        <td class="col-md-8 text-center"></td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-3">Fecha de Muestreo</td>
+                        <td class="col-md-9 text-center"></td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-3">Lugar de Muestreo</td>
+                        <td class="col-md-9 text-center"></td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-3">Tipo de Envase</td>
+                        <td class="col-md-9 text-center"></td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-3">T° Toma de Muestras</td>
+                        <td class="col-md-9 text-center"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                  <table class="table table-bordered top">
+                    <thead style="background: #ffcc33;">
+                      <tr>
+                        <th colspan="4">
+                          <span class="col-md-12">
+                            <span class="col-md-12"><center>Condiciones de Recepcion</center></span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="col-md-3">Fecha de Recepcion:</td>
+                          <td class="col-md-3"></td>
+                          <td class="col-md-3">Inspeccion Visual(muestra):</td>
+                          <td class="col-md-3"></td>
+                        </tr>
+                        <tr>
+                          <td class="col-md-3">Hora de Recepcion:</td>
+                          <td class="col-md-3"></td>
+                          <td class="col-md-3">Temperatura(°C):</td>
+                          <td class="col-md-3"></td>
+                        </tr>
+                        <tr>
+                          <td class="col-md-3">N° de Muestras:</td>
+                          <td class="col-md-3"></td>
+                          <td class="col-md-3">Cantidad(aprox):</td>
+                          <td class="col-md-3"></td>
+                        </tr>
+                        <tr>
+                          <td style="height: 20px;" class="col-md-3">Nombre y Firma Responsable de Recepción:</td>
+                          <td class="col-md-3"></td>
+                          <td style="height: 20px;" class="col-md-3">Resolución Final: &nbsp&nbsp&nbsp&nbsp&nbsp*Aceptado (A) - Rechazado (R) - No Aplica (NA)</td>
+                          <td class="col-md-3"></td>
+                        </tr>
+                        <tr>
+                          <td style="height: 20px;" class="col-md-3">Nombre y Firma Responsable Cliente:</td>
+                          <td class="col-md-3"></td>
+                          <td style="height: 20px;" class="col-md-3"></td>
+                          <td class="col-md-3"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="envoltorio" ng-show="habilitaCasino" style="margin-top: 3%;">
+
+
+                  <div class="col-md-12"><center><h3><b>Acta de Muestreo</b></h3></center></div>
+
+                  <div class="col-md-8"><h4 style="float: left;"><b>1. Datos del Cliente</b></h4>
+                    <span class="col-md-12"></span>
+                    <span class="col-md-12">Nombre de la Empresa/Cliente:__________________________ R.U.T: {{modalSolicitud.cliente.rut}}</span>
+                    <span class="col-md-12">Atencion a:_________________________________________  Fono:__________</span>
+                    <span class="col-md-12">Direccion: __________________________________________ OT:    {{modalSolicitud.id_orden_trabajo}}</span>
+                  </div>
+
+
+                  <div class="col-md-8"><h4 style="float: left; margin-top:2%; margin_bottom:2%;"><b>2. Datos del Muestreo</b></h4>
+                    <span class="col-md-12">Lugar:______________________________________________________________________</span>
+                    <span class="col-md-12">Fecha Inicio:________________________Hora Inicio:__________Hora Termino:__________</span>
+                  </div>
+
+                  <div class="col-md-12"><h4 style="float: left; margin-top:2%; margin_bottom:2%;"><b>3. Casino</b></h4></div>
+                  <div class="col-md-12"><label style="float: left;"><b>{{modalSolicitud.tipoMuestreo.descripcion}}</b></label></div>
+                  <table class="table table-bordered">
+                    <thead style="background: #ffcc33;">
+                      <th>N°</th>
+                      <th>Nombre</th>
+                      <th>T° Inicial</th>
+                      <th>T° Golpe Frio</th>
+                      <th>Area</th>
+                      <th>Cliente</th>
+                      <th>Manipulador</th>
+                      <th>Obserbaciones</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <center><button class="btn btn-success" ng-click="imprimirActa()">Imprimir</button></center>
+              </div>
+            </div>
+          </div>
+        </div>

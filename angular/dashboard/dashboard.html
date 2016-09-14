@@ -1,0 +1,298 @@
+<div class="scrollable" ng-controller="chart1">
+  <div class="scrollable-content section text-center">
+
+    <!-- <div class="list-group-item list-group-item-home" ng-show="dash">
+    <h1>Seguimiento de Solicitudes</h1>
+  </div>
+  <div ng-show="dash">
+  <div class="stepwizard col-md-offset-3" style="margin-top: 2%;" >
+  <div class="stepwizard-row setup-panel">
+  <div class="stepwizard-step">
+  <a type="button" class="btn btn-default btn-circle" ng-click="cambioChart(5)">1</a>
+  <p>Gráfico General</p>
+</div>
+<div class="stepwizard-step">
+<a type="button" class="btn btn-default btn-circle" ng-click="cambioChart(1)">2</a>
+<p>Solicitud Iniciada</p>
+</div>
+<div class="stepwizard-step">
+<a type="button" class="btn btn-default btn-circle" ng-click="cambioChart(2)">3</a>
+<p>Inspección Asignada</p>
+</div>
+<div class="stepwizard-step">
+<a type="button" class="btn btn-default btn-circle" ng-click="cambioChart(3)">4</a>
+<p>Laboratorio</p>
+</div>
+<div class="stepwizard-step">
+<a type="button" class="btn btn-default btn-circle" ng-click="cambioChart(4)">5</a>
+<p>Inspección de Transporte</p>
+</div>
+</div>
+</div>
+
+<div>
+<div id="container" ng-show="habilitarGeneral"></div>
+<div id="container1" ng-show="habilitar1"></div>
+<div id="container2" ng-show="habilitar2"></div>
+<div id="container3" ng-show="habilitar3"></div>
+<div id="container4" ng-show="habilitar4"></div>
+</div>
+</div> -->
+
+
+
+<div class="col-md-12 col-xs-12" ng-show="dash">
+  <div class="list-group-item list-group-item-home">
+    <h1>Indicadores Gráficos de Solicitudes</h1>
+  </div>
+
+  <div class="col-md-4 col-xs-12" style="margin-bottom: 3%;">
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(1)">Tipo de Muestreos Solicitados</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(2)">Total Lotes</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(3)">Productos Disponible por Bodega</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(4)">Cantidad por Proveedor</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(5)">Cantidad por Planta Procedencia</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(6)">Cantidad por Pais</button>
+  </div>
+  <!--------------------------------------------------------------------------------------------------->
+  <div class="col-md-8 col-xs-12" ng-show="habilitaTipoMuestreo">
+    <div class="list-group-item list-group-item-home">
+
+      <div class="col-md-12">
+
+        <span class="col-md-5">
+          <label class="col-md-4">Desde</label>
+          <p class="input-group col-md-8">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_inicio_tipo" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+        </span>
+
+        <span class="col-md-5">
+          <label class="col-md-4">Hasta</label>
+          <p class="input-group col-md-8">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_fin_tipo" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+        </span>
+
+        <span class="col-md-2">
+          <button class="btn btn-default" ng-click="filtroFechaTipo(fecha_inicio_tipo, fecha_fin_tipo)">Filtrar</button>
+        </span>
+
+
+      </div>
+      <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+  </div>
+  <!--------------------------------------------------------------------------------------------------->
+  <div class="col-md-8 col-xs-12" ng-show="habilitaTotalLote">
+    <div class="list-group-item list-group-item-home">
+      <div class="col-md-12">
+        <span class="col-md-5">
+          <label class="col-md-4">Desde</label>
+          <p class="input-group col-md-8">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_inicio_lote" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open3()"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+        </span>
+
+        <span class="col-md-5">
+          <label class="col-md-4">Hasta</label>
+          <p class="input-group col-md-8">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_fin_lote" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open4()"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+        </span>
+
+        <span class="col-md-2">
+          <button class="btn btn-default" ng-click="filtroFechaLote(fecha_inicio_lote, fecha_fin_lote)">Filtrar</button>
+        </span>
+
+
+      </div>
+      <div id="donut" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+    </div>
+  </div>
+  <!--------------------------------------------------------------------------------------------------->
+  <div class="col-md-8 col-xs-12" ng-show="habilitaPorBodega">
+    <div class="list-group-item list-group-item-home">
+      <div class="col-md-12">
+        <span class="col-md-5">
+          <label class="col-md-4">Desde</label>
+          <p class="input-group col-md-8">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_inicio_bodega" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open3()"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+        </span>
+
+        <span class="col-md-5">
+          <label class="col-md-4">Hasta</label>
+          <p class="input-group col-md-8">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_fin_bodega" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open4()"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+        </span>
+
+        <span class="col-md-2">
+          <button class="btn btn-default" ng-click="filtroFechaBodega(fecha_inicio_bodega, fecha_fin_bodega)">Filtrar</button>
+        </span>
+      </div>
+
+    <div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+<!--------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------->
+<div class="col-md-8 col-xs-12" ng-show="habilitaPorProveedor">
+  <div class="list-group-item list-group-item-home">
+    <div class="col-md-12">
+
+      <span class="col-md-5">
+        <label class="col-md-4">Desde</label>
+        <p class="input-group col-md-8">
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_inicio_proveedor" is-open="popup5.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open5()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </p>
+      </span>
+
+      <span class="col-md-5">
+        <label class="col-md-4">Hasta</label>
+        <p class="input-group col-md-8">
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_fin_proveedor" is-open="popup6.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open6()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </p>
+      </span>
+
+      <span class="col-md-2">
+        <button class="btn btn-default" ng-click="filtroFechaProveedor(fecha_inicio_proveedor, fecha_fin_proveedor)">Filtrar</button>
+      </span>
+
+
+    </div>
+    <div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+<!--------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------->
+<div class="col-md-8 col-xs-12" ng-show="habilitaPorPlanta">
+  <div class="list-group-item list-group-item-home">
+    <!-- <div>
+    <h3 class="home-heading">Solicitudes</h3>
+    Respecto a la Gestión de Solicitudes
+  </div> -->
+  <highchart class="chart" config="chartConfig5"></highchart>
+</div>
+</div>
+<!--------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------->
+<div class="col-md-8 col-xs-12" ng-show="habilitaPorPais">
+  <div class="list-group-item list-group-item-home">
+    <div class="col-md-12">
+
+      <span class="col-md-5">
+        <label class="col-md-4">Desde</label>
+        <p class="input-group col-md-8">
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_inicio_pais" is-open="popup9.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open9()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </p>
+      </span>
+
+      <span class="col-md-5">
+        <label class="col-md-4">Hasta</label>
+        <p class="input-group col-md-8">
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_fin_pais" is-open="popup10.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open10()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </p>
+      </span>
+
+      <span class="col-md-2">
+        <button class="btn btn-default" ng-click="filtroFechaPais(fecha_inicio_pais, fecha_fin_pais)">Filtrar</button>
+      </span>
+
+
+    </div>
+    <div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+<!--------------------------------------------------------------------------------------------------->
+</div>
+
+
+
+
+
+<div class="col-md-12" ng-show="dashAdmin">
+  <div class="list-group-item list-group-item-home">
+    <h1>Indicadores Gráficos de Ordenes de Trabajo</h1>
+  </div>
+  <div class="col-md-4 col-xs-12" style="margin-bottom: 3%;">
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(7)">Lotes por Cliente</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(8)">Productos Muestreados</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(9)">Sellos Utilzados</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(10)">Muestreos y Retiros por Area</button>
+    <button class="btn btn-default col-md-12 col-xs-12" style="height: 75px;" ng-click="mostrarDashboard(11)">Muestreos y Retiros por Cliente</button>
+  </div>
+  <!----------------------------------------------------------------------------------------------------------------------->
+  <div class="col-md-8 col-xs-12" ng-show="habilitaLotesPorCliente">
+    <div class="list-group-item list-group-item-home">
+      <highchart class="chart" config="chartConfig7"></highchart>
+    </div>
+  </div>
+  <!----------------------------------------------------------------------------------------------------------------------->
+  <div class="col-md-8 col-xs-12" ng-show="habilitaProductosMuestreados">
+    <div class="list-group-item list-group-item-home">
+      <highchart class="chart" config="chartConfig8"></highchart>
+    </div>
+  </div>
+  <!----------------------------------------------------------------------------------------------------------------------->
+  <div class="col-md-8 col-xs-12" ng-show="habilitaSellosUtilizados">
+    <div class="list-group-item list-group-item-home">
+      <highchart class="chart" config="chartConfig9"></highchart>
+    </div>
+  </div>
+  <!----------------------------------------------------------------------------------------------------------------------->
+  <div class="col-md-8 col-xs-12" ng-show="habilitaMuestreosArea">
+    <div class="list-group-item list-group-item-home">
+      <highchart class="chart" config="chartConfig10"></highchart>
+    </div>
+  </div>
+  <!----------------------------------------------------------------------------------------------------------------------->
+  <div class="col-md-8 col-xs-12" ng-show="habilitaMuestreosRetirosCliente">
+    <div class="list-group-item list-group-item-home">
+      <highchart class="chart" config="chartConfig11"></highchart>
+    </div>
+  </div>
+
+</div>
+
+
+<div ui-content-for="modals">
+  <div ng-include="'modalAvisos/mensajeAvisos.html'"></div>
+</div>
+
+
+
+
+</div>
+</div>

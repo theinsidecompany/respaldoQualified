@@ -1,0 +1,99 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if="modalHarina" ui-state="modalHarina" ng-controller="limpiarCampos">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content ">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalHarina">&times;</button>
+          <label>Nuevo Item</label>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 5%;">
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-3">Muestra/Retiro</label>
+            <select class="form-control col-md-9" ng-model="retiro">
+              <option value="retiro">Retiro</option>
+              <option value="muestreo" selected >Muestreo</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" ng-show="habilitaTrader" style="margin-bottom: 1%;">
+            <label class="col-md-5">Trader</label>
+            <select class="form-control col-md-7" ng-model="traders" ng-options="opt as opt.nombre for opt in listaTodoTraders">
+              <option value="" disabled selected style="display: none;">Seleccione Trader</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">Materia Prima</label>
+            <select class="form-control col-md-7" ng-model="materiaPrima" ng-change="listaTradersFiltro(materiaPrima)" ng-options="opt as opt.nombreMateriaPrima for opt in listarMateriaPrima">
+              <option value="" disabled selected style="display: none;">Seleccione Materia Prima</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">Proveedor</label>
+            <select class="form-control col-md-7" ng-model="trader" ng-disabled="!(!!materiaPrima)" ng-options="opt as opt.nombreTrader for opt in listaTraders">
+              <option value="" disabled selected style="display: none;">Seleccione Proveedor</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">Origen</label>
+            <select class="form-control col-md-7" ng-model="pais" ng-disabled="!(!!trader)" ng-options="opt as opt.nombrePais for opt in listarPaises">
+              <option value="" disabled selected style="display: none;">Seleccione Origen</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">Lote</label>
+            <input type="text" class="form-control col-md-7" ng-model="modalLote" placeholder="Lote">
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">N° Sacos</label>
+            <input type="text" class="form-control col-md-7" onkeypress="return numeros(event)" ng-model="modalBulto" placeholder="N° Sacos">
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">Kilos</label>
+            <input type="text" class="form-control col-md-7" onkeypress="return numeros(event)" ng-model="modalCantidad" placeholder="Kilos">
+          </div>
+
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">Contenedor</label>
+            <input type="text" class="form-control col-md-7" ng-model="modalContenedor" placeholder="Contenedor">
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">Bodega</label>
+            <select class="form-control col-md-7" ng-model="bodega" ng-options="opt as opt.nombreBodega for opt in listarBodegas">
+              <option value="" disabled selected style="display: none;">Seleccione Bodega</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-5">Planta Procedencia</label>
+            <input type="text" class="form-control col-md-7" ng-model="modalProcedencia" placeholder="Planta Procedencia">
+          </div>
+
+          <div class="col-md-12" style=" margin-top: 3%;">
+            <button class="btn btn-primary col-md-4" style="margin-left: 33%;"
+            ng-click="agregarLote(materiaPrima, trader, pais, modalLote, modalBulto, modalCantidad, modalContenedor, bodega, traders, retiro, modalProcedencia, listaLotes)"
+            ng-disabled="!(!!materiaPrima && !!trader && !!pais && !!modalLote && !!modalBulto && !!modalCantidad && !!modalContenedor && !!bodega)"
+            >Agregar Item</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <span class="col-md-5"></span>
+        <button class="btn btn-primary col-md-2" ui-turn-off="modalHarina"> Listo</button>
+      </div>
+    </div>
+  </div>
+</div>

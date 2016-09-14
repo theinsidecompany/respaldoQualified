@@ -1,0 +1,67 @@
+<div ui-content-for="title">
+  <span>Laboratorio</span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div class="col-md-6">
+      <input class="form-control" placeholder="Búsqueda.." ng-model="busqueda"/><br>
+    </div>
+
+    <div class="col-md-3">
+      <select class="form-control" ng-model="filtroEstado" ng-init="filtroEstado = 'Todas'" ng-change="filtroEstados(filtroEstado)">
+        <option value="Todas">Seleccione Estado..</option>
+        <option value="En proceso">En Proceso</option>
+        <option value="Atrasada">Atrasada</option>
+      </select>
+    </div>
+
+    <div class="envoltorio col-md-12">
+      <div class="table-condensed" style="margin-top: 1%;">
+        <table class="table table-bordered">
+          <thead style="background: #ffcc33; width: 80%;">
+            <th>N°</th>
+            <th>Solicitante</th>
+            <th>Tipo Solicitud</th>
+            <th>Estado</th>
+            <th>Fecha Creación</th>
+            <th>Fecha Planificación</th>
+            <th>Proceso</th>
+            <th>Acción</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="sol in solicitudes | filter: busqueda | filter: filtroProceso| orderBy : 'solicitud.id_orden_trabajo'"  ng-if="sol.solicitud.proceso[0].id_proceso != 11 && sol.solicitud.proceso[0].id_proceso != 15">
+              <td>{{sol.solicitud.id_orden_trabajo}}</td>
+              <td>{{sol.solicitud.cliente.nombre}}</td>
+              <td>{{sol.solicitud.tipoMuestreo.descripcion}}</td>
+              <td>{{sol.estado}}</td>
+              <td>{{sol.solicitud.fecha_creacion| date:'dd/MM/yyyy - hh:mm'}}</td>
+              <td>{{sol.solicitud.fecha_planificacion| date:'dd/MM/yyyy'}}</td>
+              <td>
+                <span>
+                  <button class="btn" style="background: #{{sol.solicitud.proceso[0].color}}" uib-popover="{{sol.solicitud.proceso[0].descripcion}}" popover-trigger="mouseenter"><i class="fa fa-{{sol.solicitud.proceso[0].icono}}" style="color: #fff;"></i></button>
+                </span>
+              </td>
+              <td>
+                <span class="btn-group">
+                  <button class="btn btn-info" ng-click="enviarVistaModal(sol.solicitud)" ui-turn-on="modalVista" uib-popover="Vista" popover-trigger="mouseenter"><i class="fa fa-eye"></i></button>
+                  <button class="btn btn-info" ui-turn-on="modalMensaje" ng-click="enviarMensajeModal(sol.solicitud)" uib-popover="Mensajes" popover-trigger="mouseenter"><i class="fa fa-envelope"></i></button>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div ui-content-for="modals">
+      <div ng-include="'laboratorio/modalVista.html'"></div>
+      <div ng-include="'laboratorio/modalMensaje.html'"></div>
+      <div ng-include="'laboratorio/modalAcepta.html'"></div>
+      <div ng-include="'laboratorio/modalAceptarTodos.html'"></div>
+      <div ng-include="'laboratorio/modalRechaza.html'"></div>
+      <div ng-include="'modalAvisos/mensajeAvisos.html'"></div>
+    </div>
+  </div>
+</div>

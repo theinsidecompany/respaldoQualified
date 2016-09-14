@@ -1,0 +1,226 @@
+<div class="scrollable modal col-lg-8 center-block" ui-if='modalVista' ui-state='modalVista'>
+    <div class="modal-backdrop in"></div>
+    <div class="scrollable">
+        <div class="scrollable-content modal-dialog">
+            <div class="modal-content">
+                <div class="container col-xs-12" style="margin-bottom: 3%;">
+                    <div class="modal-header">
+                        <button class="close" ui-turn-off="modalVista" ng-click="reset()">&times;</button>
+                        <label>Orden de Trabajo {{modalSolicitud.id_orden_trabajo}}</label>
+                    </div>
+
+                    <center>
+                        <div>
+                            <label class="label-warning col-md-12">Cliente</label> {{modalCliente}}
+                        </div>
+                    </center>
+
+                    <span class="col-md-1"></span>
+
+                    <div class="col-md-5" style="margin-top: 1%;">
+                        <div>
+                            <label class="label-warning col-md-12">Fecha Creación:</label> {{modalFecha | date:'dd/MM/yyyy - hh:mm'}}
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="margin-top: 1%;">
+                        <div>
+                            <label class="label-warning col-md-12">Fecha de Planificación:</label> {{modalFechaPlanificacion | date:'dd/MM/yyyy - hh:mm'}}
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" ng-model="cont">
+                <div class="col-xs-12" style="margin-top: 2%;">
+                    <center>
+                        <h4><b>Detalle Orden de Trabajo</b><h4></center>
+          <span class="col-md-2" style="float: right; margin-bottom: 2%;margin-right: 5%;"><button ng-disabled="habilita" ng-click="setarValorModalTodos(modalSolicitud, listaLotesModal)" class="btn btn-success col-md-12" ui-turn-on="modalAceptarTodos" uib-popover="Enviar Items" popover-trigger="mouseenter">Enviar Items</button></span>
+        </div>
+
+        <div class="well window">
+          <div class="scrollable-content section wrapper" ui-scroll-bottom="loadMore()">
+
+        <div class="container col-xs-12" style="margin-bottom: 1%;">
+          <div ng-if="modalSolicitud.tipoMuestreo.id_muestreo == 1">
+            <div class="table-condensed col-xs-12 col-md-12">
+              <table class="table table-bordered">
+                <thead  style="background: #ffcc33;">
+                  <th class="col-md-1">Lote</th>
+                  <th class="col-md-1">Materia Prima</th>
+                  <th class="col-md-1">Proveedor</th>
+                  <th class="col-md-1">País</th>
+                  <th class="col-md-1">Bodega</th>
+                  <th class="col-md-1">Contenedor</th>
+                  <th class="col-md-1">Lote</th>
+                  <th class="col-md-1">N° Sacos</th>
+                  <th class="col-md-1">Kilos</th>
+                  <th class="col-md-1">Tipo Muestreo</th>
+                  <th class="col-md-1">Selección</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaLotesModal" ng-if="item.inspectorEnvia == true && item.certificado == undefined">
+                    <td>{{item.lote}}</td>
+                    <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                    <td>{{item.trader.nombreTrader}}</td>
+                    <td>{{item.paisTrader.nombrePais}}</td>
+                    <td>{{item.bodega.nombreBodega}}</td>
+                    <td>{{item.contenedor}}</td>
+                    <td>{{item.lote}}</td>
+                    <td>{{item.bultos}}</td>
+                    <td>{{item.cantidad}}</td>
+                    <td>{{item.tipoMuestreo.descripcion}}</td>
+                    <td><input class="form-control" type="checkbox" ng-init="item.envia = false" ng-model="item.envia" ng-click="habilitarBotonEnviar(item)"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="table-condensed col-xs-12 col-md-12" ng-if="modalSolicitud.tipoMuestreo.id_muestreo == 2">
+            <table class="table table-bordered">
+              <thead style="background: #ffcc33;">
+                <th>Codigo</th>
+                <th>Retiro/Muestreo</th>
+                <th>Obserbaciones</th>
+                <th>Analisis</th>
+                <th>Acción</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in listaLotesModal" ng-if="item.inspectorEnvia == true && item.certificado == undefined">
+                  <td>{{item.codigo}}</td>
+                  <td>{{item.retiro}}</td>
+                  <td>{{item.tipo}}</td>
+                  <td>{{item.listaDescripcion}}</td>
+                  <td>
+                    <input class="form-control" type="checkbox" ng-init="item.envia = false" ng-model="item.envia" ng-click="habilitarBotonEnviar(item)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+          <div class="col-xs-12 col-md-12" ng-if="modalSolicitud.tipoMuestreo.id_muestreo > 2 && modalSolicitud.tipoMuestreo.id_muestreo < 7">
+            <div class="table-condensed col-xs-12 col-md-12">
+              <table class="table table-bordered">
+                <thead style="background: #ffcc33;">
+                  <th>Codigo</th>
+                  <th>Retiro/Muestreo</th>
+                  <th>Observaciones</th>
+                  <th>Analisis</th>
+                  <th>Acción</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaLotesModal" ng-if="item.inspectorEnvia == true && item.certificado == undefined">
+                    <td>{{item.codigo}}</td>
+                    <td>{{item.retiro}}</td>
+                    <td>{{item.tipo}}</td>
+                    <td>{{item.listaDescripcion}}</td>
+                    <td>
+                      <input class="form-control" type="checkbox" ng-init="item.envia = false" ng-model="item.envia" ng-click="habilitarBotonEnviar(item)">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+          <div class="col-xs-12 col-md-12" ng-if="modalSolicitud.tipoMuestreo.id_muestreo == 8">
+            <div class="table-condensed col-xs-12 col-md-12">
+              <table class="table table-bordered">
+                <thead style="background: #ffcc33;">
+                  <th>Retiro/Muestreo</th>
+                  <th>Trader</th>
+                  <th>Origen</th>
+                  <th>Bodega</th>
+                  <th>Encargado Bodega</th>
+                  <th>Planta Procedencia</th>
+                  <th>Toneladas</th>
+                  <th>Materia Prima</th>
+                  <th>Proveedor</th>
+                  <th>Temperatura</th>
+                  <th>Tipo Almacenaje</th>
+                  <th>Acción</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaLotesModal" ng-if="item.inspectorEnvia == true && item.certificado == undefined">
+                    <td>{{item.retiro}}</td>
+                    <td>{{item.traders.nombre}}</td>
+                    <td>{{item.origen.nombrePais}}</td>
+                    <td>{{item.bodega.nombreBodega}}</td>
+                    <td>{{item.encargadoBodega}}</td>
+                    <td>{{item.procedencia}}</td>
+                    <td>{{item.toneladas}}</td>
+                    <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                    <td>{{item.trader.nombreTrader}}</td>
+                    <td>{{item.temperatura}}</td>
+                    <td>{{item.seleccionAlmacenaje}}</td>
+                    <td>
+                      <input class="form-control" type="checkbox" ng-init="item.envia = false" ng-model="item.envia" ng-click="habilitarBotonEnviar(item)">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-xs-12 col-md-12" ng-if="modalSolicitud.tipoMuestreo.id_muestreo == 7">
+            <div class="table-condensed col-xs-12 col-md-12">
+              <table class="table table-bordered">
+                <thead style="background: #ffcc33;">
+                  <th>Retiro/Muestreo</th>
+                  <th>Composito</th>
+                  <th>Estrato</th>
+                  <th>Trader</th>
+                  <th>Origen</th>
+                  <th>Bodega</th>
+                  <th>Encargado Bodega</th>
+                  <th>Planta Procedencia</th>
+                  <th>Toneladas</th>
+                  <th>Tipo Aceite</th>
+                  <th>Fabricante</th>
+                  <th>Acción</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in listaLotesModal" ng-if="item.inspectorEnvia == true && item.certificado == undefined">
+                    <td>{{item.retiro}}</td>
+                    <td ng-if=" item.composito == undefined || item.composito == false">N/A</td>
+                    <td ng-if=" item.composito != undefined && item.composito != false">OK</td>
+                    <td ng-if="item.estrato == null">N/A</td>
+                    <td ng-if="item.estrato != null">{{item.descripcionEstrato}}</td>
+                    <td>{{item.traders.nombre}}</td>
+                    <td>{{item.origen.nombrePais}}</td>
+                    <td>{{item.bodega.nombreBodega}}</td>
+                    <td>{{item.encargadoBodega}}</td>
+                    <td>{{item.procedencia}}</td>
+                    <td>{{item.toneladas}}</td>
+                    <td>{{item.tipoAceite}}</td>
+                    <td>{{item.fabricante}}</td>
+                    <td>
+                      <input class="form-control" type="checkbox" ng-init="item.envia = false" ng-model="item.envia" ng-click="habilitarBotonEnviar(item)">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="pdfVer" ng-show="false">
+          <embed ng-src="{{content}}" style="width:100%;height:100%;"></embed>
+        </div>
+</div>
+</div>
+        <div class="modal-footer">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

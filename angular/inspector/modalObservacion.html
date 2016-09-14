@@ -1,0 +1,86 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalObservacion' ui-state='modalObservacion' ng-controller="inspectorController">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ng-click="vaciarListaEvidencias()" ui-turn-off="modalObservacion">&times;</button>
+        </div>
+
+        <div>
+          <table class="table table-condensed">
+            <thead style="background-color: #ffcc33 ">
+              <th>Observaciones</th>
+              <th></th>
+              <th></th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="obs in ObservacionesModal">
+                <td>Observación: {{obs.contenido}} </td>
+                <td>De:      {{obs.emisor}} <br>
+                  Perfil:  {{obs.cargo}} <br>
+                  Fecha:   {{obs.fecha | date: 'dd/MM/yyyy - hh:mm'}}
+                </td>
+                <td><span class="btn-group">
+                  <button ng-repeat="item in obs.evidencias" ng-click="mostrarEvidencia(item.nombreArchivo)" class="btn btn-info"><i class="fa fa-external-link"></i></button>
+                </span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row"></div>
+
+          <label>Observación</label>
+          <div class="col-lg-12">
+            <div>
+              <textarea class="form-control" ng-model="observacion" style="max-width: 100%"></textarea>
+            </div>
+          </div>
+          <div class="col-lg-12" style="margin-top: 2%;">
+            <center><strong>{{numeros}} Archivos Cargados</strong></center>
+          </div>
+          <form name="myForm">
+            <div class="col-lg-12" style="margin-top: 3%;">
+              <span class="col-md-2"></span>
+              <div class="col-md-3">
+                <button class="btn btn-success btn-block" ng-click="agregarObservacion(modalSol, observacion, id_loteObservacion, listaEvidencias)" ng-disabled="!(!!observacion)" ><i class="fa fa-mail-reply"></i> Enviar</button>
+              </div>
+              <span class="col-md-2"></span>
+              <div class="col-md-3">
+                  <center>
+                      <center>
+                        <span class="btn-group">
+                          <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile, modalSol, id_loteObservacion, listaEvidencias)" class="btn btn-success"><i class="fa fa-upload"></i></button>
+                          <div class="fileUpload btn btn-info">
+                            <i class="fa fa-file-image-o"></i>
+                            <input type="file" class="upload" ngf-select ng-model="picFile" name="file"
+                                    gf-max-size="40MB" required
+                            ngf-model-invalid="errorFile">
+                          </div>
+                          <button ng-click="picFile = null" ng-show="picFile" class="btn btn-danger"><i class="fa fa-remove"></i></button>
+                        </span>
+                        <span class="progress" ng-show="picFile.progress >= 0">
+                          <div style="width:{{picFile.progress}}%"
+                          ng-bind="picFile.progress + '%'"></div>
+                        </span>
+                        <span ng-show="picFile.result">Éxito</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                      </center>
+                    </form>
+                  </center>
+              </div>
+            </div>
+            <div class="col-lg-12" style="margin-top: 2%; margin-bottom: 2%;">
+              <center><img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"></center>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="evidenciaVer" ng-show="false">
+        <img src="{{evidencias}}">
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

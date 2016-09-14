@@ -1,0 +1,38 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalAsignacion' ui-state='modalAsignacion'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalAsignacion">&times;</button>
+          <label>Asignar</label>
+        </div>
+        <div class="col-xs-12 text-center">
+          <label style="margin-bottom: 3%;">Generar Solicitud Despacho</label>
+          <br>
+
+          <div class="col-xs-12" style="margin-bottom: 2%;">
+            <div class="col-xs-3">
+              <label>Fecha de Asignación</label>
+            </div>
+            <div class="col-xs-8">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_asignacion" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <span class="col-xs-2"></span>
+        <button class="btn btn-warning col-xs-3" ng-disabled="!(!!fecha_asignacion)" ng-click="EnviarDespacho(listaLotesUsuario, fecha_asignacion)" ui-turn-off="modalAsignacion">Enviar Solicitud</button><br>
+        <button class="btn btn-danger col-xs-3" ui-turn-off="modalAsignacion" style="margin-left: 10%;">Cancelar</button>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

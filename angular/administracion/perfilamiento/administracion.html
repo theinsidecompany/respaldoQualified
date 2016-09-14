@@ -1,0 +1,61 @@
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div style="margin-top: 5%;">
+
+      <span class="col-md-1 col-xs-0"></span>
+
+      <div class="col-md-4">
+        <h4><b>Usuario</b></h4>
+        <select multiple style="height: 200px; width: 100%;" class="form-control" ng-model="usuariosSeleccionados" ng-options="opt as opt.username for opt in usuarios">
+        </select>
+      </div>
+
+      <div class="col-md-2" style="margin-top: 5%; margin-bottom: 8%;">
+        <div class="col-md-12 col-xs-4">
+          <button style="margin-bottom: 2%;" type="button" class="btn btn-success btn-block" ui-turn-on="crearUsuarioModal" ng-click="enviarCreacionUsuario()" uib-popover="Crear" popover-trigger="mouseenter"><i class="fa fa-user-plus"></i></button>
+        </div>
+        <div class="col-md-12 col-xs-4">
+          <button ng-disabled="!!(!usuariosSeleccionados)" style="margin-bottom: 2%;" type="button" class="btn btn-info btn-block" ui-turn-on="modificarUsuarioModal" ng-click="enviarDatosModUsuario(usuariosSeleccionados)" uib-popover="Modificar" popover-trigger="mouseenter"><i class="fa fa-edit"></i></button>
+        </div>
+        <div class="col-md-12 col-xs-4">
+          <button ng-disabled="!!(!usuariosSeleccionados)" style="margin-bottom: 2%;" type="button" class="btn btn-danger btn-block" ui-turn-on="modalEliminarUsuario" ng-click="enviarEliminarUsuario(usuariosSeleccionados)" uib-popover="Eliminar" popover-trigger="mouseenter"><i class="fa fa-remove"></i></button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <h4><b>Perfil</b></h4>
+        <select style="height: 200px;width: 100%;" multiple class="form-control" ng-model="perfilSeleccionado" ng-options="opt as opt.nombre_perfil for opt in perfiles">
+        </select><br>
+      </div>
+    </div>
+    <!-- <div class="col-md-2" style="margin-top: 5%; margin-bottom: 8%;">
+    <div class="col-md-12 col-xs-4">
+    <button style="margin-bottom: 2%;" type="button" class="btn btn-success btn-block" ui-turn-on="crearPerfilModal">Crear</button>
+  </div>
+  <div class="col-md-12 col-xs-4">
+  <button ng-disabled="!!(!perfilSeleccionado)" style="margin-bottom: 2%;" type="button" class="btn btn-info btn-block" ui-turn-on="modificarPerfilModal" ng-click="enviarDatosModPerfil(perfilSeleccionado)">Editar</button>
+</div>
+<div class="col-md-12 col-xs-4">
+<button ng-disabled="!!(!perfilSeleccionado)" style="margin-bottom: 2%;" type="button" class="btn btn-danger btn-block" ui-turn-on="modalEliminarPerfil" ng-click="eliminacionModalPerfil(perfilSeleccionado)">Eliminar</button><br>
+</div>
+</div> -->
+
+<!-- <div class="col-md-12 col-xs-12">
+<h4><b>Llaves</b></h4>
+<select style="height: 200px;width: 100%; margin-bottom: 5%;" ng-model="SeleccionLlaves" multiple ng-options="opt as opt.nombre_llave for opt in llavesCombo">
+</select>
+<br>
+</div> -->
+
+</div>
+<div ui-content-for="modals">
+  <div ng-include="'administracion/perfilamiento/crearUsuarioModal.html'"></div>
+  <div ng-include="'administracion/perfilamiento/modificarUsuarioModal.html'"></div>
+  <div ng-include="'administracion/perfilamiento/modalEliminarUsuario.html'"></div>
+  <div ng-include="'administracion/perfilamiento/crearPerfilModal.html'"></div>
+  <div ng-include="'administracion/perfilamiento/modificarPerfilModal.html'"></div>
+  <div ng-include="'administracion/perfilamiento/modalEliminarPerfil.html'"></div>
+  <div ng-include="'modalAvisos/mensajeAvisos.html'"></div>
+</div>
+</div>

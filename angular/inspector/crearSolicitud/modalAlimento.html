@@ -1,0 +1,80 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalAlimento' ui-state='modalAlimento' ng-controller="limpiarCampos">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content ">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalAlimento">&times;</button>
+          <label>Nuevo Alimento</label>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 5%;">
+
+
+          <div class="col-md-12" style="margin-bottom: 1%;">
+            <label class="col-md-3">N° Cotización</label>
+            <input class="col-md-3 form-control" ng-model="codigo" placeholder="N° Cotización">
+            <select class="form-control col-md-6" ng-model="retiro">
+              <option value="muestreo">Muestreo</option>
+              <option value="retiro">Retiro</option>
+            </select>
+          </div>
+
+          <div class="col-md-12">
+            <label class="col-md-3">Observacion</label>
+            <textarea class="col-md-9 form-control" ng-model="tipo" placeholder="Tipo"></textarea>
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%; margin-top: 1%;">
+            <label class="col-md-3">Analisis</label>
+            <select class="form-control col-md-9" ng-model="tipoAnalisis" ng-change="SeleccionAnalisis(tipoAnalisis)" ng-options="opt as opt.descripcion for opt in listaTipoAnalisis" >
+              <option style="display: none;" value="" selected>Seleccione</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" ng-show="mostrarAlimentos" style="margin-bottom: 1%;">
+            <label class="col-md-3">Alimentos RSA</label>
+            <select class="form-control col-md-9" ng-model="alimentosRsa" ng-change="SeleccionAlimento(alimentosRsa)" ng-options="opt.id_tipoAlimento as opt.descripcion for opt in listaAlimentosRsa" >
+              <option style="display: none;" value="" selected>Seleccione</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" ng-show="mostrarSubAlimentos" style="margin-bottom: 1%;">
+            <label class="col-md-3">Derivados</label>
+            <select class="form-control col-md-9" ng-model="subAlimentosRsa" ng-change="SeleccionSubAlimento(subAlimentosRsa)" ng-options="opt.id_subAlimento as opt.descripcion for opt in listaSubAlimentos" >
+              <option style="display: none;" value="" selected>Seleccione</option>
+            </select>
+          </div>
+
+          <button class="col-md-12 btn btn-primary" ng-click="agregarListaAnalisis(tipoAnalisis, listaSubAnalisis, alimentosRsa, subAlimentosRsa)" style="margin-bottom: 1%;">Agregar</button>
+
+          <div class="col-md-12">
+            <span class="col-md-3 btn btn-info" ng-repeat="item in listaAnalisis track by $index"><label ng-click="mostrar($index, listaAnalisis, listaSubAnalisis)">{{item.tipoAnalisis.descripcion}}-({{item.cantidad}}) &nbsp;</label><i class="fa fa-remove" ng-click="remover($index, listaAnalisis)"></i></span>
+          </div>
+
+          <div>
+            <button class="btn btn-danger" ng-click="desSeleccionar(listaSubAnalisis)" style="margin-bottom: 1%; float: right; margin-left: 1%;">Desmarcar Todo</button>
+            <button class="btn btn-success" ng-click="seleccionarTodo(listaSubAnalisis)" style="margin-bottom: 1%; float: right;">Marcar Todo</button>
+
+            <table class="col-md-12 table table-bordered" >
+              <thead></thead>
+              <tbody>
+                <tr ng-repeat="item in listaSubAnalisis">
+                  <td>{{item.descripcion}}</td>
+                  <td><input type="checkbox" ng-model="item.selAnalisis"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <button class="btn btn-primary col-md-12" ng-click="agregarAlimento(codigo, retiro, tipo, listaAnalisis)">Agregar Muestreo</button>
+
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="scrollable modal col-lg-4 center-block" ui-if='modalRechaza' ui-state='modalRechaza'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalRechaza">&times;</button>
+          <label>Rechaza</label>
+        </div>
+        <div class="col-xs-12 text-center">
+          <label style="margin-bottom: 3%;">Realmente desea rechazar el muestreo de la orden {{modalSol.id_solicitud}}</label>
+          <br>
+          <button class="btn btn-warning col-xs-3"  style="margin-left: 20%;" ng-click="validarRechazonMuestreo(modalSol)" ui-turn-off="modalRechaza">Rechazar</button>
+          <button class="btn btn-danger col-xs-3" ui-turn-off="modalRechaza" style="margin-left: 10%;">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

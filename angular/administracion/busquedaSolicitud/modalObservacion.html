@@ -1,0 +1,41 @@
+<div class="scrollable modal col-lg-4 center-block" ui-if='modalObservacion' ui-state='modalObservacion' ng-controller="busquedaController">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ng-click="vaciarListaEvidencias()" ui-turn-off="modalObservacion">&times;</button>
+        </div>
+        <div>
+          <table class="table table-condensed">
+            <thead style="background-color: #ffcc33 ">
+              <th>Observaciones</th>
+              <th></th>
+              <th></th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="obs in ObservacionesModal">
+                <td>Observación: {{obs.contenido}} </td>
+                <td>De:      {{obs.emisor}} <br>
+                  Perfil:  {{obs.cargo}} <br>
+                  Fecha:   {{obs.fecha | date: 'dd/MM/yyyy - hh:mm'}}
+                </td>
+                <td><span class="btn-group">
+                  <button ng-repeat="item in obs.evidencias" ng-click="mostrarEvidencia(item.nombreArchivo)" class="btn btn-info"><i class="fa fa-external-link"></i></button>
+                </span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row"></div>
+        </div>
+        <div id="evidenciaVer" ng-show="false">
+          <img src="{{evidencias}}">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

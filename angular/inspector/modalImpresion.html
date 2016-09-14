@@ -1,0 +1,154 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalImpresion' ui-state='modalImpresion'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalImpresion">&times;</button>
+          <label>Impresion Sellos</label>
+        </div>
+        <span class="col-md-2"></span>
+        <button class="btn btn-success col-xs-3" ng-click="imprimirSellos()" ng-disabled="habilitaImpresion" ui-turn-off="modalImpresion" style="margin-top: 2%;">Imprimir</button>
+        <span class="col-md-2"></span>
+        <button class="btn btn-danger col-xs-3" ui-turn-off="modalImpresion" style="margin-top: 2%;">Cancelar</button>
+        <span class="col-md-2"></span>
+
+        <span class="col-md-12 top">
+          <input class="form-control col-md-8" onkeypress="return numeros(event)" ng-model="nroImpresion" placeholder="Impresiones">
+          <button class="btn btn-info col-md-4" ng-click="generarArray(nroImpresion)">Generar Etiquetas</button>
+        </span>
+
+
+
+        <div class="col-xs-12 text-center">
+
+          <table class="table table-bordered top" ng-repeat="item in listaImpresion">
+            <thead >
+              <tr>
+                <th colspan="2">
+                  <img src="resource\img\logo_menu.png">
+                  <center>Información de Muestra</center>
+                  <span style="float: right;"> OT: {{modalSolicitud.id_orden_trabajo}}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-md-3">Lote</td>
+                <td class="col-md-9 text-center">{{item.id_lote}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Tipo Producto</td>
+                <td class="col-md-9 text-center">{{item.muestreo}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Sello</td>
+                <td class="col-md-9 text-center">{{item.sellos[0]}} al {{item.sellos[item.sellos.length -1]}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Fecha de Muestreo</td>
+                <td class="col-md-9 text-center">{{modalSolicitud.fecha_muestreo | date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Kilos del Lote</td>
+                <td class="col-md-9 text-center">{{item.cantidad}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">N° de Sacos</td>
+                <td class="col-md-9 text-center">{{item.bultos}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Fabricante/Productor</td>
+                <td class="col-md-9 text-center">{{item.trader}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Origen</td>
+                <td class="col-md-9 text-center">{{item.paisTrader.nombrePais}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Trader</td>
+                <td class="col-md-9 text-center">{{item.traders}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Lugar de Muestreo</td>
+                <td class="col-md-9 text-center">{{item.bodega.nombreBodega}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Destino de Analisis</td>
+                <td class="col-md-9 text-center">{{item.laboratorio}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-xs-12 text-center" id="divSellos" ng-show="false">
+          <span ng-repeat="n in nroImpresiones">
+          <table class="table table-bordered top" ng-repeat="item in listaImpresion" style="width: 700px; border: 1px solid #000;">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  <img src="resource\img\logo_menu.png">
+                  <center>Información de Muestra</center>
+                  <span style="float: right;"> OT: {{modalSolicitud.id_orden_trabajo}}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-md-3">Lote</td>
+                <td class="col-md-9 text-center">{{item.id_lote}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Tipo Producto</td>
+                <td class="col-md-9 text-center">{{item.muestreo}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Sello</td>
+                <td class="col-md-9 text-center">{{item.sellos[0]}} al {{item.sellos[item.sellos.length -1]}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Fecha de Muestreo</td>
+                <td class="col-md-9 text-center">{{modalSolicitud.fecha_muestreo | date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Kilos del Lote</td>
+                <td class="col-md-9 text-center">{{item.cantidad}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">N° de Sacos</td>
+                <td class="col-md-9 text-center">{{item.bultos}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Fabricante/Productor</td>
+                <td class="col-md-9 text-center">{{item.trader}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Origen</td>
+                <td class="col-md-9 text-center">{{item.paisTrader.nombrePais}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Trader</td>
+                <td class="col-md-9 text-center">{{item.traders}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Lugar de Muestreo</td>
+                <td class="col-md-9 text-center">{{item.bodega.nombreBodega}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Destino de Analisis</td>
+                <td class="col-md-9 text-center">{{item.laboratorio}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </span>
+        </div>
+      </div>
+
+
+      <div class="modal-footer">
+          <!-- <button class="btn btn-success col-xs-12" ng-click="imprimirSellos()" ui-turn-off="modalImpresion">Imprimir</button>
+          <button class="btn btn-danger col-xs-12" ui-turn-off="modalImpresion">Cancelar</button> -->
+      </div>
+    </div>
+  </div>
+</div>

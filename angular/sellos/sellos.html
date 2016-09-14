@@ -1,0 +1,68 @@
+<div ui-content-for="title">
+  <span>Gestion Sellos</span>
+</div>
+
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div class="col-md-3">
+      <label class="col-md-12" style="margin-top:19%;">Ingreso Sellos</label>
+
+      <input class="form-control col-md-12" ng-model="desde" style="margin-top:5%;"  onkeypress="return numeros(event)" placeholder="Desde">
+      <input class="form-control col-md-12" ng-model="hasta" style="margin-top:5%;" onkeypress="return numeros(event)" placeholder="Hasta">
+
+      <button class="btn btn-success col-md-12 col-xs-12" style="margin-top:5%;"  ng-click="GenerarSellos(desde, hasta)" ng-disabled="!(!!desde && !!hasta)" uib-popover="Agregar Sellos" popover-trigger="mouseenter"><i class="fa fa-plus"></i></button>
+
+    </div>
+
+    <div class="col-md-4">
+
+      <label class="col-md-12" style="margin-top:14%; margin-bottom: 4%;">Sellos Disponibles</label>
+
+      <select class="form-control" multiple style="height: 200px; width: 100%; margin-top:5%;" ng-model="sellosSeleccion" ng-options="opt as opt for opt in listaSellos">
+        <option disabled selected style="display:none">Seleeccione sellos</option>
+      </select><br>
+
+      <span class="col-md-12">
+        <button class="btn btn-danger" ng-click="darBaja(sellosSeleccion)" ng-disabled="!(!!sellosSeleccion)" uib-popover="Dar de Baja" popover-trigger="mouseenter"><i class="fa fa-arrow-down"></i></button>
+        <button class="btn btn-success" ng-click="sellosUsuario(sellosSeleccion, seleccionInspector)" ng-disabled="!(!!seleccionInspector && !!sellosSeleccion)" uib-popover="Asignar a Inspector" popover-trigger="mouseenter"><i class="fa fa-arrow-right"></i></button>
+      </span>
+
+      <label class="col-md-12" style="margin-top:5%;">Sellos de Baja </label>
+
+      <select class="form-control" multiple style="height: 200px; width: 100%; margin-top:5%;" ng-model="sellosBajaSeleccion" ng-options="opt as opt for opt in sellosBaja">
+        <option disabled selected style="display:none">Sellos de Baja</option>
+      </select>
+
+    </div>
+
+    <div class="col-md-4">
+
+
+      <label class="col-md-12" style="margin-top:5%;">Sellos Inspector</label>
+
+      <select class="form-control" style="margin-top:5%;" ng-model="seleccionInspector" ng-change="listarsellosFiltroUsuario(seleccionInspector)" ng-options="opt.id_usuario as opt.nombre for opt in inspectores">
+        <option value="" disabled selected style="display:none">Seleccione Inspector</option>
+      </select>
+
+      <select class="form-control" multiple style="height: 200px; width: 100%; margin-top:5%;" ng-model="sellosSeleccionInspector" ng-options="opt as opt for opt in sellosInspector">
+        <option disabled selected style="display:none">Sellos Inspector</option>
+      </select><br>
+
+
+      <span class="col-md-12"><button class="btn btn-danger" ng-click="darBajaUsuario(sellosSeleccionInspector, seleccionInspector)" ng-disabled="!(!!sellosSeleccionInspector)" uib-popover="Dar de Baja" popover-trigger="mouseenter"><i class="fa fa-arrow-left"></i></button></span>
+
+
+      <label class="col-md-12" style="margin-top:5%;">Sellos Utilizados </label>
+
+      <select class="form-control" multiple style="height: 200px; width: 100%; margin-top:5%;" ng-model="seleccionUsado" ng-options="opt as opt for opt in sellosUsados">
+        <option  disabled selected style="display:none">Sellos Utilizados</option>
+      </select>
+
+
+    </div>
+
+
+  </div>
+</div>

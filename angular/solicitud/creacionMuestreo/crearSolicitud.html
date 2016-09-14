@@ -1,0 +1,189 @@
+<div ui-content-for="title">
+  <span>Nueva Solicitud {{titulo}}</span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div class="col-md-12">
+      <div class="col-md-6" style="margin-top: 2%;">
+
+        <div class="col-md-12" style="margin-bottom: 2%;">
+          <div class="col-md-4">
+            <label>Fecha Creación</label>
+          </div>
+          <div>
+            <div class="col-md-8">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_creacion" ng-disabled="true" ng-required="true"/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-disabled="true"><i class="fa fa-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12" style="margin-bottom: 2%;">
+          <div class="col-md-4">
+            <label>Fecha de Solicitud de Muestreo</label>
+          </div>
+          <div>
+            <div class="col-md-8">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_muestreo" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12" style="margin-bottom: 2%;" ng-show="mostrarCasino">
+          <div class="col-md-4">
+            <label>Casino</label>
+          </div>
+          <span class="col-md-2"></span>
+          <span class="col-md-2">
+            <input type="checkbox" class="form-control" ng-model="casino">
+          </span>
+          <span class="col-md-4"></span>
+        </div>
+
+
+        <div class="col-md-12">
+          <div class="col-md-4" style="margin-bottom: 8%;">
+            <button class="btn btn-primary col-xs-12 col-md-12" ui-turn-on="modalMuestreo" ng-click="habilitarCampos()">Agregar Nuevo Item</button>
+          </div>
+          <div class="col-md-4" >
+            <button class="btn btn-primary col-xs-12 col-md-12" ng-click="crearSolicitud(fecha_muestreo, casino)">Enviar Solicitud</button>
+          </div>
+          <div class="col-md-4" >
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <center><h3><b>Detalle Solicitud</b><h3></center>
+
+      <div class="col-xs-12 col-md-12" ng-show="mostrarTablaMuestreo">
+        <div class="table-condensed col-xs-12 col-md-12">
+          <table class="table table-bordered">
+            <thead style="background: #ffcc33;">
+              <th>Codigo</th>
+              <th>Retiro/Muestreo</th>
+              <th>Observaciones</th>
+              <th>Analisis</th>
+              <th>Accion</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in listaItems">
+                <td>{{item.codigo}}</td>
+                <td>{{item.retiro}}</td>
+                <td>{{item.tipo}}</td>
+                <td>{{item.listaDescripcion}}</td>
+                <td>
+                  <i class="fa fa-remove" ng-click="eliminar($index, listaItems)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <div class="col-xs-12 col-md-12" ng-show="mostarTablaGrano">
+        <div class="table-condensed col-xs-12 col-md-12">
+          <table class="table table-bordered">
+            <thead style="background: #ffcc33;">
+              <th>Retiro/Muestreo</th>
+              <th>Trader</th>
+              <th>Origen</th>
+              <th>Bodega</th>
+              <th>Encargado Bodega</th>
+              <th>Planta Procedencia</th>
+              <th>Toneladas</th>
+              <th>Materia Prima</th>
+              <th>Proveedor</th>
+              <th>Temperatura</th>
+              <th>Tipo Almacenaje</th>
+              <th>Accion</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in listaItems">
+                <td>{{item.retiro}}</td>
+                <td>{{item.traders.nombre}}</td>
+                <td>{{item.origen.nombrePais}}</td>
+                <td>{{item.bodega.nombreBodega}}</td>
+                <td>{{item.encargadoBodega}}</td>
+                <td>{{item.procedencia}}</td>
+                <td>{{item.toneladas}}</td>
+                <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                <td>{{item.trader.nombreTrader}}</td>
+                <td>{{item.temperatura}}</td>
+                <td>{{item.seleccionAlmacenaje}}</td>
+                <td>
+                  <i class="fa fa-remove" ng-click="eliminar($index, listaItems)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+
+      <div class="col-xs-12 col-md-12" ng-show="mostarTablaAceite">
+        <div class="table-condensed col-xs-12 col-md-12">
+          <table class="table table-bordered">
+            <thead style="background: #ffcc33;">
+              <th>Retiro/Muestreo</th>
+              <th>Composito</th>
+              <th>Estrato</th>
+              <th>Trader</th>
+              <th>Origen</th>
+              <th>Bodega</th>
+              <th>Encargado Bodega</th>
+              <th>Planta Procedencia</th>
+              <th>Toneladas</th>
+              <th>Tipo Aceite</th>
+              <th>Fabricante</th>
+              <th>Accion</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in listaItems">
+                <td>{{item.retiro}}</td>
+                <td ng-if=" item.composito == undefined || item.composito == false">N/A</td>
+                <td ng-if=" item.composito != undefined && item.composito != false">OK</td>
+                <td ng-if="item.estrato == null">N/A</td>
+                <td ng-if="item.estrato != null">{{item.descripcionEstrato}}</td>
+                <td>{{item.traders.nombre}}</td>
+                <td>{{item.origen.nombrePais}}</td>
+                <td>{{item.bodega.nombreBodega}}</td>
+                <td>{{item.encargadoBodega}}</td>
+                <td>{{item.procedencia}}</td>
+                <td>{{item.toneladas}}</td>
+                <td>{{item.tipoAceite}}</td>
+                <td>{{item.fabricante}}</td>
+                <td>
+                  <i class="fa fa-remove" ng-click="eliminar($index, listaItems)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <div ui-content-for="modals">
+        <div ng-include="'solicitud/creacionMuestreo/modalMuestreo.html'"></div>
+      </div>
+    </div>
+  </div>

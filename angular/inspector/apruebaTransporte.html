@@ -1,0 +1,22 @@
+<div class="scrollable modal col-lg-4 center-block" ui-if='modalApruebaTransporte' ui-state='modalApruebaTransporte'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalApruebaTransporte">&times;</button>
+          <label>Aprobar Transporte</label>
+        </div>
+        <div class="col-xs-12 text-center">
+          <label style="margin-bottom: 3%;">Realmente desea aprobar el transporte</label>
+          <br>
+          <button class="btn btn-success col-xs-3"  style="margin-left: 20%;" ng-click="aprovarTransporte(modalSol)" ui-turn-off="modalApruebaTransporte">Aceptar</button>
+          <button class="btn btn-danger col-xs-3" ui-turn-off="modalApruebaTransporte" style="margin-left: 10%;">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

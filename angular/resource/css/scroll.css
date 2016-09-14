@@ -1,0 +1,86 @@
+.window {
+    margin-top: 12px;
+    overflow-y: auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    /* fixes scrolling in IE */
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.ie8 .window {
+    /* assumes you are using conditional classes for IE fixes (http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/) */
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.slider-frame-wrapper {
+    overflow: auto;
+    overflow-x: auto;
+}
+
+.slider-frame {
+    overflow: visible;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.ie8 .slider-frame {
+    margin: 20px 0;
+}
+
+.slider-panel {
+    max-width: auto;
+    /* width of each individual items */
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 40px;
+    white-space: normal;
+}
+
+.html, body {
+    margin: 0;
+    overflow-y: hidden;
+    max-height: 100vh;
+}
+
+@media screen and (min-width: 1280px) {
+    .wrapper {
+        width: auto;
+        height: auto;
+        max-height: auto;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .wrapper {
+        width: 1500px;
+        height: 1000vh;
+        max-height: auto;
+        overflow-x: scroll;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch
+    }
+}
+
+.box {
+    position: relative;
+    align-self: center;
+    margin-left: 50px;
+    float: left;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+}

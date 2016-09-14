@@ -1,0 +1,102 @@
+<div ui-content-for="title">
+  <span>Nueva Solicitud Alimentos</span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div class="col-md-12">
+      <div class="col-md-6" style="margin-top: 2%;">
+
+        <div class="col-md-12" style="margin-bottom: 2%;">
+          <div class="col-md-4">
+            <label>Fecha Creación</label>
+          </div>
+          <div>
+            <div class="col-md-8">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_creacion" ng-disabled="true" ng-required="true"/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-disabled="true"><i class="fa fa-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12" style="margin-bottom: 2%;">
+          <div class="col-md-4">
+            <label>Fecha de Solicitud de Muestreo</label>
+          </div>
+          <div>
+            <div class="col-md-8">
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_muestreo" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-12" style="margin-bottom: 2%;" ng-if="idTipo == 2">
+          <div class="col-md-4">
+            <label>Casino</label>
+          </div>
+          <span class="col-md-2"></span>
+          <span class="col-md-2">
+            <input type="checkbox" class="form-control" ng-model="casino" ng-init="casino = false">
+          </span>
+          <span class="col-md-4"></span>
+        </div>
+
+
+        <div class="col-md-12">
+          <div class="col-md-4" style="margin-bottom: 8%;">
+            <button class="btn btn-primary col-xs-12 col-md-12" ui-turn-on="modalAlimento">Agregar Nuevo Item</button>
+          </div>
+          <div class="col-md-4" >
+            <button class="btn btn-primary col-xs-12 col-md-12" ng-click="crearSolicitud(fecha_muestreo, casino)">Enviar Solicitud</button>
+          </div>
+          <div class="col-md-4" >
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <center><h3><b>Detalle Solicitud</b><h3></center>
+
+      <div class="table-condensed col-xs-12 col-md-12">
+        <table class="table table-bordered">
+          <thead style="background: #ffcc33;">
+            <th>Codigo</th>
+            <th>Retiro/Muestreo</th>
+            <th>Obserbaciones</th>
+            <th>Analisis</th>
+            <th>Acción</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in listaItems">
+              <td>{{item.codigo}}</td>
+              <td>{{item.retiro}}</td>
+              <td>{{item.tipo}}</td>
+              <td>{{item.listaDescripcion}}</td>
+              <td>
+                <i class="fa fa-remove" ng-click="eliminar($index, listaItems)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div ui-content-for="modals">
+        <div ng-include="'solicitud/SolicitudAlimento/modalAlimento.html'"></div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,57 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modificarUsuarioModal' ui-state='modificarUsuarioModal'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ng-click="cerrar()" ui-turn-off="modificarUsuarioModal">&times;</button>
+          <h4>Modificar Usuario</h4>
+        </div>
+
+
+        <label>Usuario:</label>
+        <input class="form-control" ng-disabled="true" placeholder="Ingrese usuario" ng-model="usernameMod" required><br>
+        <label>Nombre:</label>
+        <input class="form-control" placeholder="Ingrese nombre" ng-model="nombreUsuarioMod" required><br>
+        <label>Password:</label><i class="fa fa-eye" ng-click="cambiarTipo()" data-toggle="tooltip" data-placement="top" title="Mostrar Contraseña" style="margin-left:2%;"></i>
+        <input class="form-control" placeholder="Ingrese password" ng-model="passwordMod" type="{{tipo}}" required><br>
+
+        <div class="col-md-12" style="margin-bottom: 2%;">
+          <span class="col-md-9">
+            <label>Correo:</label><br>
+            <input class="form-control col-md-7" placeholder="Ingrese correo" ng-model="correo" required>
+            <button class="btn btn-success col-md-1 col-xs-6" ng-click="agregarCorreo(correo, listaCorreos)"><i class="fa fa-plus"></i></button>
+            <button class="btn btn-danger col-md-1 col-xs-6" ng-click="eliminarCorreo(correoEliminar, listaCorreos)"><i class="fa fa-remove"></i></button>
+          </span>
+          <span ng-show="habilitaTrader" class="col-md-3 col-xs-12">
+            <label>Trader:</label>
+            <input class="form-control" type="checkbox" ng-model="trader"><br>
+          </span>
+        </div>
+
+        <div class="col-md-12" style="margin-bottom: 2%;">
+            <select class="form-control" style="height: 100px;" ng-model="correoEliminar" ng-options="opt as opt for opt in listaCorreos">
+              <option disabled selected value="" style="display: none;">Seleccione Correo</option>
+            </select>
+        </div>
+
+        <center><button class="btn btn-info btn-block" ><i class="fa fa-user"></i></button></center>
+        <br>
+        <center><select style="height: 200px;width: 300px" ng-model="perfilesUsuariosMod" ng-change="seleccionPerfil(perfilesUsuarios)" ng-click="listarPerfilesLlaves(perfilesUsuarios)" multiple ng-options="opt.id_perfil as opt.nombre_perfil for opt in perfiles" ng-change="habilitarModal(perfilesUsuariosMod)"></center>
+        </select>
+        <br><br>
+        <span class="col-md-2"></span>
+        <button class="btn btn-primary col-md-3" style="margin-left: 4%;" type="submit" ng-disabled="!(!!perfilesUsuariosMod && !!usernameMod && !!nombreUsuarioMod && !!passwordMod) || !habilitarModalPerfil" ng-click="actualizarUsuario(id_usuario, usernameMod, nombreUsuarioMod, passwordMod, listaCorreos, perfilesUsuariosMod, trader, habilitaTrader)" ui-turn-off="modificarUsuarioModal">Modificar</button>
+        <span class="col-md-1"></span>
+        <button class="btn btn-danger col-md-3" type="button" ui-turn-off="modificarUsuarioModal" ng-click="cerrar()">Cancelar</button>
+
+      </div>
+
+      <div class="modal-footer">
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

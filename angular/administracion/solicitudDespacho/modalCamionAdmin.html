@@ -1,0 +1,97 @@
+/*<style>
+.Fondo {
+  background-image: url("inspector/solicitudDespacho/Captura Contra.JPG");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-origin: content-box }
+
+  @media screen and (min-width: 700px) {
+    .lado {margin-left: 400px;}
+    .lado2 {margin-right: 400px;}
+}
+
+
+  </style>*/
+
+  <div class="scrollable modal col-lg-6 center-block" ui-if='modalVistaCamion' ui-state='modalVistaCamion'>
+    <div class="modal-backdrop in"></div>
+    <div class="scrollable-content modal-dialog">
+      <div class="modal-content">
+        <div class="container col-xs-12" style="margin-bottom: 2%;">
+          <div class="modal-header">
+            <button class="close" ui-turn-off="modalVistaCamion">&times;</button>
+            <label>Solicitud de Despacho {{id_solicitud}}</label>
+          </div>
+
+          <div class="col-md-12">
+
+            <div class="col-md-9">
+              <span class="col-md-12 espacio">
+                <label class="col-md-3 col-xs-12">Nombre Chofer: </label>
+                <input class="col-md-9 col-xs-12 form-control" ng-disabled="true" ng-model="modalChofer" placeholder="Chofer">
+              </span>
+
+              <span class="col-md-12 espacio">
+                <label class="col-md-3 col-xs-12">Patente Transporte: </label>
+                <input class="col-md-9 col-xs-12 form-control" ng-disabled="true" ng-model="modalPatente" placeholder="Patente">
+              </span>
+
+              <span class="col-md-12 espacio">
+                <label class="col-md-3 col-xs-12">Destino: </label>
+                <input class="col-md-9 col-xs-12 form-control" ng-disabled="true" ng-model="modalDestino" placeholder="Destino">
+              </span>
+
+              <span class="col-md-12 espacio">
+                <label class="col-md-3 col-xs-12">N° Guia / Factura: </label>
+                <input class="col-md-9 col-xs-12 form-control" ng-disabled="true" ng-model="modalFactura" placeholder="N° Guia / Factura">
+              </span>
+
+            </div>
+
+
+
+            <div class="col-md-3 col-xs-3">
+
+              <div class="col-md-12 col-xs-12">
+                <span class="col-md-10" ></span>
+                <div class="col-md-2 Fondo" style="width: 125px; height: 100px">
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4">
+                <span ng-repeat="item in listaNon">
+                  <p class="btn btn-info" style="border: 1px solid #000; width: 55px; height: 50px">{{item.sello}}</p>
+                </span>
+              </div>
+
+
+
+              <div class="col-xs-4 col-md-1"></div>
+
+              <div class="col-md-4 col-xs-4">
+                <span ng-repeat="obj in listaPar">
+                  <p class="btn btn-info" style="border: 1px solid #000; width: 55px; height: 50px">{{obj.sello}}</p>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-12 top">
+            <button class="btn btn-success col-md-3 col-xs-12" ng-if="modalCheck != undefined" ng-click="cargaChecklist(modalCheck)" ui-turn-on="modalChecklist"><i class="fa fa-list-alt"></i></button>
+            <button class="btn btn-info col-md-3 col-xs-12" ng-if="modalCheck == undefined">Checklist no Realizado</button>
+            <span class="col-md-6"></span>
+            <button class="btn btn-warning col-md-3 col-xs-12" ui-turn-off="modalVistaCamion" ng-if="solicicitudD.proceso[0].id_proceso <= 11" ng-click="cancelarCamion(itemCargaCamion, solicicitudD, index)">Cancelar Registro</button>
+          </div>
+
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,143 @@
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+      <div class="col-md-12" style="margin-top: 3%;">
+
+        <div class="stepwizard col-md-offset-3">
+            <div class="stepwizard-row setup-panel">
+              <div class="stepwizard-step">
+                  <a type="button" class="btn btn-{{color1}} btn-circle"><i class="fa fa-check"></i></a>
+                  <p>Iniciada</p>
+                  <p>{{fecha_creacion | date: 'dd/MM/yyyy'}}</p>
+                </div>
+              <div class="stepwizard-step">
+                  <a type="button" class="btn btn-{{color2}} btn-circle"><i class="fa fa-search"></i></a>
+                  <p>Asignada</p>
+                  <p>{{fecha_planificacion | date: 'dd/MM/yyyy'}}</p>
+              </div>
+              <div class="stepwizard-step">
+                  <a type="button" class="btn btn-{{color3}} btn-circle"><i class="fa fa-cubes"></i></a>
+                  <p>Muestreado</p>
+                  <p>{{fecha_fin_muestreo | date: 'dd/MM/yyyy'}}</p>
+              </div>
+              <div class="stepwizard-step">
+                  <a type="button" class="btn btn-{{color4}} btn-circle"><i class="fa fa-flask"></i></a>
+                  <p>Laboratorio</p>
+                  <p>{{fecha_inspector_envia | date: 'dd/MM/yyyy'}}</p>
+              </div>
+              <div class="stepwizard-step">
+                  <a type="button" class="btn btn-{{color5}} btn-circle"><i class="fa fa-check"></i></a>
+                  <p>Aceptada</p>
+                  <p>{{fecha_laboratorio | date: 'dd/MM/yyyy'}}</p>
+              </div>
+              <div class="stepwizard-step">
+                  <a type="button" class="btn btn-{{color6}} btn-circle"><i class="fa fa-truck"></i></a>
+                  <p>Tranporte</p>
+                  <p>{{fecha_aceptacion | date: 'dd/MM/yyyy'}}</p>
+              </div>
+              <div class="stepwizard-step">
+                  <a type="button" class="btn btn-{{color7}} btn-circle"><i class="fa fa-file"></i></a>
+                  <p>Recepcion</p>
+                  <p>{{fecha_listo_transporte | date: 'dd/MM/yyyy'}}</p>
+              </div>
+              <div class="stepwizard-step">
+                  <a type="button" class="btn btn-{{color8}} btn-circle"><i class="fa fa-flag"></i></a>
+                  <p>Finalizada</p>
+                  <p>{{fecha_recepcion | date: 'dd/MM/yyyy'}}</p>
+              </div>
+            </div>
+        </div>
+
+      </div>
+
+
+      <hr class="col-md-12">
+
+      <div class="col-md-12">
+
+        <span class="col-md-5">
+        <label class="col-md-4">Desde</label>
+        <p class="input-group col-md-8">
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_desde" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </p>
+        </span>
+
+        <span class="col-md-5">
+        <label class="col-md-4">Hasta</label>
+        <p class="input-group col-md-8">
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="fecha_hasta" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </p>
+        </span>
+
+        <span class="col-md-2">
+          <button class="btn btn-default" ng-click="filtroFecha(fecha_desde, fecha_hasta, listaLotes)">Filtrar</button>
+        </span>
+      </div>
+
+
+      <div class="col-md-12">
+        <label class="col-md-4">Busqueda Lote:</label>
+        <input class="col-md-4 form-control" ng-model="busqueda" placeholder="Busqueda...">
+      </div>
+
+
+
+  <hr class="col-md-12">
+
+      <div class="col-lg-12">
+
+        <table class="table table-bordered table-hover">
+            <thead style="background: #ffcc33;">
+                <th class="col-md-2">Lote</th>
+                <th class="col-md-2">Materia Prima</th>
+                <th class="col-md-2">Proveedor</th>
+                <th class="col-md-1">País</th>
+                <th class="col-md-1">Bodega</th>
+                <th class="col-md-1">Contenedor</th>
+                <th class="col-md-1">N° Sacos</th>
+                <th class="col-md-1">Kilos</th>
+                <th class="col-md-1">Tipo Muestreo</th>
+                <th class="col-md-1">Observaciones</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in listaLotes | filter : {lote: busqueda}" ng-click="lienaTiempoDatos(item, listaLotes, $index)" class="{{item.fondo}} puntero">
+                    <td>{{item.lote}}</td>
+                    <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                    <td>{{item.trader.nombreTrader}}</td>
+                    <td>{{item.paisTrader.nombrePais}}</td>
+                    <td>{{item.bodega.nombreBodega}}</td>
+                    <td>{{item.contenedor}}</td>
+                    <td>{{item.bultos}}</td>
+                    <td>{{item.cantidad}}</td>
+                    <td>{{item.tipoMuestreo.descripcion}}</td>
+                    <td ng-if="item.observaciones == true">
+                        <center><button class="btn btn-danger" ui-turn-on="modalObservacion" ng-click="enviarObservacionModal(item.id_solicitud, item.id_lote)" uib-popover="Observacion" popover-trigger="mouseenter"><i class="fa fa-comment"></i></button></center>
+                    </td>
+                    <td ng-if="item.observaciones == undefined">
+                        <center><button class="btn btn-warning" ui-turn-on="modalObservacion" ng-click="enviarObservacionModal(item.id_solicitud, item.id_lote)" uib-popover="Observacion" popover-trigger="mouseenter"><i class="fa fa-comment"></i></button></center>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+      </div>
+
+
+      <div ui-content-for="modals">
+        <div ng-include="'solicitud/busquedaSolicitud/modalObservacion.html'"></div>
+        <div ng-include="'modalAvisos/mensajeAvisos.html'"></div>
+      </div>
+
+
+
+
+  </div>
+</div>

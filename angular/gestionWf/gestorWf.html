@@ -1,0 +1,45 @@
+<div ui-content-for="title">
+  <span>Work Flow</span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <button class="btn btn-warning" ng-click="guardar(seleccion, pw, listaVacia)">Guardar</button>
+
+    <div class="col-md-12 row">
+      <h3>Paso Work Flow</h3>
+      <select class="form-control" ng-model="seleccion" ng-options="opt.id_perfil as opt.nombre_perfil for opt in perfiles">
+        <option value="" disabled selected style="display: none;">Seleccione Perfil</option>
+      </select><br>
+    </div>
+
+    <div class="col-md-12">
+
+
+      <table class="table table-bordered">
+        <thead>
+          <th>Paso Work Flow</th>
+          <th style="background: #ffcc33;" ng-repeat="perf in pasoWf" ng-model="id_paso">{{perf.paso}}</th>
+        </thead>
+
+        <tbody>
+
+          <tr ng-repeat="paso in pasoWf">
+            <td style="background: #fff;">{{paso.paso}}</td>
+            <td ng-repeat="item in pasoWf"><input type="checkbox" class="form-control" ng-model="check" ng-click="prueba(paso.id, item.id, check );"></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- <div class="col-md-12 row" >
+        <select class="form-control" ng-model="flujo" ng-options="opt.id as opt.nombre for opt in flujo">
+          <option value="" disabled selected style="display: none;">Seleccione paso</option>
+        </select><br>
+      </div> -->
+
+    </div>
+
+  </div>
+</div>

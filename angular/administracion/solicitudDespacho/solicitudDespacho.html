@@ -1,0 +1,60 @@
+
+<div ui-content-for="title">
+  <span>Solicitudes Despacho</span>
+</div>
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div class="col-md-6" style="margin-bottom: 2%;">
+      <input class="form-control" placeholder="Búsqueda.." ng-model="busqueda"/>
+    </div>
+
+    <!-- <div class="col-md-3" style="margin-bottom: 2%;">
+    <select class="form-control" ng-model="filtroBodega" ng-options="opt.nombreBodega as opt.nombreBodega for opt in listarBodegas" >
+  </select>
+</div> -->
+
+<div class="envoltorio col-md-12">
+  <div class="table-condensed" style="margin-top: 1%;">
+    <table class="table table-bordered">
+      <thead style="background: #ffcc33; width: 80%;">
+        <th>N°</th>
+        <th>Fecha Creación</th>
+        <th>Inspector</th>
+        <th>Proceso</th>
+        <th>Acción</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in listaSD">
+          <td>{{item.id_solicitud_despacho}}</td>
+          <td>{{item.fecha_creacion | date:'dd/MM/yyyy - hh:mm'}}</td>
+          <td>{{item.inspector}}</td>
+          <td>
+            <span>
+              <button class="btn" style="background: #{{item.proceso[0].color}}" uib-popover="{{item.proceso[0].descripcion}}" popover-trigger="mouseenter"><i class="fa fa-{{item.proceso[0].icono}}" style="color: #fff;"></i></button>
+            </span>
+          </td>
+          <td>
+            <span class="btn-group">
+              <button class="btn btn-info" ui-turn-on="modalVistaSDAdmin" ng-click="enviarDatosVista(item)" ><i class="fa fa-eye"></i></button>
+              <button class="btn btn-info" ng-if="item.proceso[0].id_proceso == 14" ui-turn-on="modalIngresoAdmin" ng-click="enviarDatosIngreso(item)" ><i class="fa fa-truck"></i></button>
+              <button class="btn btn-warning" ng-if="item.id_inspector == undefined" ui-turn-on="modalInspector" ng-click="enviarDatosInspector(item)" ><i class="fa fa-male"></i></button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div ui-content-for="modals">
+  <div ng-include="'administracion/solicitudDespacho/modalVistaSD.html'"></div>
+  <div ng-include="'administracion/solicitudDespacho/modalInspector.html'"></div>d
+  <div ng-include="'administracion/solicitudDespacho/modalObservacion.html'"></div>d
+  <div ng-include="'administracion/solicitudDespacho/modalIngresoAdmin.html'"></div>d
+  <div ng-include="'administracion/solicitudDespacho/modalCamionAdmin.html'"></div>d
+  <div ng-include="'administracion/solicitudDespacho/modalChecklist.html'"></div>d
+</div>
+</div>
+</div>

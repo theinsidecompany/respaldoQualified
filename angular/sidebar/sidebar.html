@@ -1,0 +1,28 @@
+<div class="scrollable">
+    <h1 class="scrollable-header app-name">Qualified Tracefeed</h1>
+    <div class="scrollable-content" ng-controller="LoginCtrl">
+        <div class="list-group" ui-turn-off='uiSidebarLeft'>
+            <a ng-show="dash" class="list-group-item" ng-click="reset()" href="#/dashboard">Dashboard <i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="linea" class="list-group-item" href="#/linea">Linea de Tiempo<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="busSolCliente" class="list-group-item" href="#/busquedaSolicitudCliente">Solicitudes<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="busLoteCliente" class="list-group-item" href="#/lotesUsuario">Lotes<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="busSolDesp" class="list-group-item" href="#/solDespacho">Solicitudes Despacho<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="solOT" class="list-group-item" href="#/busquedaSolicitudAdministrador">Solicitudes<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="solOT" class="list-group-item" href="#/otadmin">Ordenes de Trabajo<i class="fa fa-chevron-right pull-right"></i></a>
+            <!-- <a ng-show="creaSol" class="list-group-item" href="#/crearSolicitud">Crear Solicitud<i class="fa fa-chevron-right pull-right"></i></a> -->
+            <a ng-show="busSolDespAdmin" class="list-group-item" href="#/solDespachoAdmin">Solicitudes Despacho<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="sellos" class="list-group-item" href="#/sellos">Gestión Sellos<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="admin" class="list-group-item" href="#/administracion">Perfilamiento<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="admPar" class="list-group-item" href="#/parametros">Administracion Parámetros<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="otinspec" class="list-group-item" href="#/inspector">Gestión OT <i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="solDespInsp" class="list-group-item" href="#/solDespachoInpector">Solicitudes Despacho<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="creaSol" class="list-group-item" href="#/crearSolicitudInspector">Crear Solicitud<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="lab" class="list-group-item" href="#/laboratorio">Muestras<i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-show="false" class="list-group-item" href="#/workflow">Gestion WorkFlow<i class="fa fa-chevron-right pull-right"></i></a>
+            <!--<a class="list-group-item" href="#/gestionInspector">Gestión Inspección<i class="fa fa-chevron-right pull-right"></i></a>-->
+            <!--<a class="list-group-item" href="#/administracion">Adminstración <i class="fa fa-chevron-right pull-right"></i></a>-->
+            <!--<a class="list-group-item" href="#/perfilamiento">Perfilamiento<i class="fa fa-chevron-right pull-right"></i></a>-->
+            <a ng-show="cerrar" class="list-group-item" href="#/cierre" ng-click="cerrarSesion()">Cerrar Sesión <i class="fa fa-chevron-right pull-right"></i></a>
+        </div>
+    </div>
+</div>

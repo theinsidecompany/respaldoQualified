@@ -1,0 +1,70 @@
+<div ui-content-for="title">
+    <span>Solicitudes Despacho</span>
+</div>
+
+<div class="scrollable">
+    <div class="scrollable-content section text-center">
+
+        <div class="col-md-6" style="margin-bottom: 2%;">
+            <input class="form-control" placeholder="Búsqueda.." ng-model="busqueda" />
+        </div>
+
+        <!-- <div class="col-md-3" style="margin-bottom: 2%;">
+    <select class="form-control" ng-model="filtroBodega" ng-options="opt.nombreBodega as opt.nombreBodega for opt in listarBodegas" >
+  </select>
+</div> -->
+
+        <div class="scrollable-content section" ui-scroll-bottom="loadMore()">
+            <div class="envoltorio col-md-12">
+                <div class="envoltorio col-md-12">
+
+                    <div class="table-condensed" style="margin-top: 1%;">
+                        <table class="table table-bordered">
+                            <thead style="background: #ffcc33; width: 80%;">
+                                <th>N°</th>
+                                <th>Fecha Creación</th>
+                                <th>Fecha Asignada</th>
+                                <th>Inspector</th>
+                                <th>Detalle</th>
+                                <th>Proceso</th>
+                                <th>Accion</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in listaSD">
+                                    <td>{{item.id_solicitud_despacho_cliente}}</td>
+                                    <td>{{item.fecha_creacion | date:'dd/MM/yyyy - hh:mm'}}</td>
+                                    <td>{{item.fecha_asignacion | date:'dd/MM/yyyy'}}</td>
+                                    <td ng-if="item.inspector != null">{{item.inspector}}</td>
+                                    <td ng-if="item.inspector == null">Sin Asignar</td>
+                                    <td>
+                                        <button class="btn btn-info" ui-turn-on="modalVistaSD" ng-click="enviarDatosModalVista(item)"><i class="fa fa-eye"></i></button>
+                                        <button class="btn btn-info" ng-if="item.proceso[0].id_proceso == 14" ui-turn-on="modalIngresoCliente" ng-click="enviarDatosIngreso(item)"><i class="fa fa-truck"></i></button>
+                                    </td>
+                                    <td>
+                                        <span>
+              <button class="btn" style="background: #{{item.proceso[0].color}}" uib-popover="{{item.proceso[0].descripcion}}" popover-trigger="mouseenter"><i class="fa fa-{{item.proceso[0].icono}}" style="color: #fff;"></i></button>
+            </span>
+                                    </td>
+                                    <td>
+                                        <span class="btn-group" ng-if="item.proceso[0].id_proceso == 14">
+              <button class="btn btn-warning" ng-click="enviarRecepcion(item)" uib-popover="Confirmar" popover-trigger="mouseenter"><i class="fa fa-file-text"></i></button>
+            </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ui-content-for="modals">
+            <div ng-include="'solicitud/solicitudDespacho/modalVista.html'"></div>
+            <div ng-include="'solicitud/solicitudDespacho/modalObservacion.html'"></div>
+            <div ng-include="'solicitud/solicitudDespacho/modalIngresoCliente.html'"></div>
+            <div ng-include="'solicitud/solicitudDespacho/modalCamionCliente.html'"></div>
+            <div ng-include="'solicitud/solicitudDespacho/modalChecklist.html'"></div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,175 @@
+<style>
+.Fondo1 {
+background-image: url("inspector/solicitudDespacho/Captura.JPG");
+background-repeat: no-repeat;
+background-size: 100% 100%;
+background-origin: content-box }
+</style>*/
+
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalCamion' ui-state='modalCamion'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 2%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalCamion">&times;</button>
+          <label>Solicitud de Despacho {{id_solicitud}}</label>
+        </div>
+
+        <div class="col-md-12">
+
+          <div class="col-md-9">
+            <span class="col-md-12 espacio">
+              <label class="col-md-3 col-xs-12">Empresa Transporte: </label>
+              <input class="col-md-9 col-xs-12 form-control" ng-disabled="habilita" ng-model="empresa" placeholder="Empresa Tranporte">
+            </span>
+
+            <span class="col-md-12 espacio">
+              <label class="col-md-3 col-xs-12">Nombre Chofer: </label>
+              <input class="col-md-9 col-xs-12 form-control" ng-disabled="habilita" ng-model="chofer" placeholder="Chofer">
+            </span>
+
+            <span class="col-md-12 espacio">
+              <label class="col-md-3 col-xs-12">Patente Transporte: </label>
+              <input class="col-md-9 col-xs-12 form-control" ng-disabled="habilita" ng-model="patente" placeholder="Patente">
+            </span>
+
+            <span class="col-md-12 espacio">
+              <label class="col-md-3 col-xs-12">Destino: </label>
+              <input class="col-md-9 col-xs-12 form-control" ng-disabled="habilita" ng-model="destino" placeholder="Destino">
+            </span>
+
+            <span class="col-md-12 espacio">
+              <label class="col-md-3 col-xs-12">N° Guia / Factura: </label>
+              <input class="col-md-9 col-xs-12 form-control"  onkeypress="return numeros(event)"  ng-disabled="habilita" ng-model="factura" placeholder="N° Guia / Factura">
+            </span>
+
+            <div class="col-md-12 col-xs-12 column" style="margin-top: 3%; margin-bottom: 3%;">
+              <span class="portlet" ng-repeat="item in listaSellos">
+                <p class="btn btn-info portlet-header" id="$index">{{item}}</p>
+              </span>
+            </div>
+
+          </div>
+
+
+
+          <div class="col-md-1 col-xs-1" style="margin-right: 5%;">
+            <div class="col-md-12 column" id="div25" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">25</h4>
+            </div>
+            <div class="col-md-12 column" id="div23" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">23</h4>
+            </div>
+            <div class="col-md-12 column" id="div21" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">21</h4>
+            </div>
+            <div class="col-md-12 column" id="div19" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">19</h4>
+            </div>
+            <div class="col-md-12 column" id="div17" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">17</h4>
+            </div>
+            <div class="col-md-12 column" id="div15" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">15</h4>
+            </div>
+            <div class="col-md-12 column" id="div13" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">13</h4>
+            </div>
+            <div class="col-md-12 column" id="div11" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">11</h4>
+            </div>
+            <div class="col-md-12 "  style="width: 80px; height: 20px">
+            </div>
+            <div class="col-md-12 column" id="div9" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">9</h4>
+            </div>
+            <div class="col-md-12 column" id="div7" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">7</h4>
+            </div>
+            <div class="col-md-12 column" id="div5" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">5</h4>
+            </div>
+            <div class="col-md-12 column" id="div3" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">3</h4>
+            </div>
+            <div class="col-md-12 column" id="div1" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">1</h4>
+            </div>
+          </div>
+
+          <div class="col-md-1 col-xs-1">
+            <div class="col-md-12 column" id="div26" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">26</h4>
+            </div>
+            <div class="col-md-12 column" id="div24" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">24</h4>
+            </div>
+            <div class="col-md-12 column" id="div22" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">22</h4>
+            </div>
+            <div class="col-md-12 column" id="div20" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">20</h4>
+            </div>
+            <div class="col-md-12 column" id="div18" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">18</h4>
+            </div>
+            <div class="col-md-12 column" id="div16" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">16</h4>
+            </div>
+            <div class="col-md-12 column" id="div14" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">14</h4>
+            </div>
+            <div class="col-md-12 column" id="div12" style="background-color: #9D9D9F; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">12</h4>
+            </div>
+            <div class="col-md-12 " style="width: 80px; height: 20px">
+            </div>
+            <div class="col-md-12 column" id="div10" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">10</h4>
+            </div>
+            <div class="col-md-12 column" id="div8" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">8</h4>
+            </div>
+            <div class="col-md-12 column" id="div6" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">6</h4>
+            </div>
+            <div class="col-md-12 column" id="div4" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">4</h4>
+            </div>
+            <div class="col-md-12 column" id="div2" style="background-color: #C0C1C5; border: 1px solid #000; width: 80px; height: 37px">
+              <h4 class="esconde">2</h4>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-xs-12">
+            <span class="col-md-10"></span>
+            <div class="col-md-2 Fondo1" style="width: 125px; height: 100px;">
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <label class="col-md-3 col-xs-12">Checklist: </label>
+            <span class="col-md-2 col-xs-11"></span>
+            <button class="btn btn-warning col-md-1 col-xs-1" ui-turn-on="modalObservacionCheckList" ng-click="enviarObservacionModalCheckList(listaObservaciones)" uib-popover="Observacion" popover-trigger="mouseenter"><i class="fa fa-comment"></i></button>
+            <button class="btn btn-info col-md-3 col-xs-3" ui-turn-on="modalChecklist"><i class="fa fa-list-alt"></i></button>
+            <button class="btn btn-info col-xs-3" ng-disabled="!(!!chofer && !!patente && !!destino && !!factura)" ng-click="obtenerDatos(id_solicitud, empresa, chofer, patente, destino, factura, asignados, sellos, checklistModalTransporte, listaObservaciones)" ui-turn-off="modalCamion">Guardar</button>
+          </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

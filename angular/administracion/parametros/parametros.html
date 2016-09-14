@@ -1,0 +1,232 @@
+<div ui-content-for="title">
+  <span>Parametros</span>
+</div>
+
+
+
+
+<div class="scrollable">
+  <div class="scrollable-content section text-center">
+
+    <div class="col-md-12 puntero" style="background: #ffcc33; border: 1px solid #fff;" ng-click="muestra(1);">
+      <center style="margin-top: 1%;margin-bottom: 1%;"><h4 style="color: #000;"><label>Materia Prima</label></h4><center>
+      </div>
+
+      <div class="col-md-12 row" style="margin-bottom: 3%;" ng-show="materiaPrima">
+        <h3>Materia Prima</h3>
+        <span class="col-md-2"></span>
+
+        <div class="col-md-8" style="margin-top: 3%;">
+          <span class="col-md-6">
+            <select class="col-md-12 form-control" ng-change="listarMateriaPrima(materia)" ng-model="materia" style="height: 120px;">
+              <option value="" selected disabled style="display: none;">Seleccione</option>
+              <option value="1">Harinas</option>
+              <option value="2">Granos</option>
+            </select>
+          </span>
+
+          <span class="col-md-6">
+            <select class="form-control col-md-8" ng-model="materiaPrimaSeleccion" ng-options="opt as opt.nombreMateriaPrima for opt in listarMateriaPrima" style="height: 120px;">
+              <option value="" disabled selected style="display: none;">Seleccione Materia Prima</option>
+            </select>
+            <span class="btn-group col-md-4">
+              <button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!materia && !!nombreMateriaPrima)" ng-click="crearMateria(materia, nombreMateriaPrima)" uib-popover="Crear" popover-trigger="mouseenter"><i class="fa fa-plus"></i></button>
+              <button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!materia && !!materiaPrimaSeleccion && !!nombreMateriaPrima)" ng-click="modificaMateriaPrima(materiaPrimaSeleccion, nombreMateriaPrima)" uib-popover="Modificar" popover-trigger="mouseenter"><i class="fa fa-edit"></i></button>
+              <button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!materiaPrimaSeleccion)" ng-click="eliminaMateriaPrima(materiaPrimaSeleccion)"><i class="fa fa-remove" uib-popover="Eliminar" popover-trigger="mouseenter"></i></button>
+            </span>
+            <div class="col-md-12" style="margin-top: 2%;">
+              <input class="form-control" placeholder="Materia Prima" ng-model="nombreMateriaPrima">
+            </div>
+          </span>
+        </div>
+
+      </div>
+      <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+      <div class="col-md-12 puntero" style="background: #ffcc33; border: 1px solid #fff;" ng-click="muestra(7);">
+        <center style="margin-top: 1%;margin-bottom: 1%;"><h4 style="color: #000;"><label>Proveedor</label></h4><center>
+        </div>
+
+        <div class="col-md-12 row" style="margin-bottom: 3%;" ng-show="Proveedor">
+          <span class="col-md-3"></span>
+          <div class="col-md-6" style="margin-top: 3%;">
+            <h3>Proveedor</h3>
+            <select class="form-control col-md-8" ng-model="traderSeleccion" ng-options="opt as opt.nombreTrader for opt in listaTraders" style="height: 120px;">
+              <option value="" disabled selected style="display: none;">Seleccione Proveedor</option>
+            </select>
+            <span class="btn-group col-md-4">
+              <button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!nombreTrader)" ng-click="crearTrader(nombreTrader)" uib-popover="Crear" popover-trigger="mouseenter"><i class="fa fa-plus"></i></button>
+              <button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!traderSeleccion && !!nombreTrader)" ng-click="modificaTrader(traderSeleccion, nombreTrader)" uib-popover="Modificar" popover-trigger="mouseenter"><i class="fa fa-edit"></i></button>
+              <button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!traderSeleccion)" ng-click="eliminaTrader(traderSeleccion)"><i class="fa fa-remove" uib-popover="Eliminar" popover-trigger="mouseenter"></i></button>
+            </span>
+            <div class="col-md-12" style="margin-top: 2%;">
+              <input class="form-control col-md-12" placeholder="Proveedor" ng-model="nombreTrader">
+            </div>
+          </div>
+
+        </div>
+
+        <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+        <div class="col-md-12 puntero" style="background: #ffcc33; border: 1px solid #fff;" ng-click="muestra(2);">
+          <center style="margin-top: 1%;margin-bottom: 1%;"><h4 style="color: #000;"><label>Bodega</label></h4><center>
+          </div>
+
+          <div class="col-md-12 row" style="margin-bottom: 3%;" ng-show="bodegaUsuario">
+            <span class="col-md-3"></span>
+            <div class="col-md-6" style="margin-top: 3%;">
+              <h3>Bodega</h3>
+              <select class="form-control col-md-8" ng-model="bodegaSeleccion" ng-options="opt.id_bodega as opt.nombreBodega for opt in listarBodegas" style="height: 120px;">
+                <option value="" disabled selected style="display: none;">Seleccione Bodega</option>
+              </select>
+
+              <span class="btn-group col-md-4">
+                <button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!nombreBodega)" ng-click="crearBodega(nombreBodega)" uib-popover="Crear" popover-trigger="mouseenter"><i class="fa fa-plus"></i></button>
+                <button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!nombreBodega && !!bodegaSeleccion)" ng-click="modificaBodega(bodegaSeleccion, nombreBodega)" uib-popover="Modificar" popover-trigger="mouseenter"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!bodegaSeleccion)" ng-click="eliminaBodega(bodegaSeleccion)"><i class="fa fa-remove" uib-popover="Eliminar" popover-trigger="mouseenter"></i></button>
+              </span>
+
+              <div class="col-md-12" style="margin-top: 2%;">
+                <input class="form-control" placeholder="Bodega" ng-model="nombreBodega">
+              </div>
+            </div>
+          </div>
+          <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+          <!-- <div class="col-md-12 puntero" style="background: #ffcc33; border: 1px solid #fff;" ng-click="muestra(3);">
+            <center style="margin-top: 1%;margin-bottom: 1%;"><h4 style="color: #000;">Tipo Muestreo</h4><center>
+            </div>
+
+            <div class="col-md-12 row" style="margin-bottom: 3%;" ng-show="muestreoDiv">
+              <span class="col-md-3"></span>
+              <div class="col-md-6" style="margin-top: 3%;">
+                <h3>Tipo Muestreo</h3>
+                <select class="form-control col-md-8" ng-model="muestreoSeleccion" ng-options="opt as opt.tipoMuestreo for opt in listaTipoMuestreo" style="height: 120px;">
+                  <option value="" disabled selected style="display: none;">Seleccione Muestreo</option>
+                </select>
+                <span class="btn-group col-md-4">
+                  <button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!muestreo)" ng-click="crearTipoMuestreo(muestreo)" uib-popover="Crear" popover-trigger="mouseenter"><i class="fa fa-plus"></i></button>
+                  <button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!muestreoSeleccion && !!muestreo)" ng-click="modificaTipoMuestreo(muestreoSeleccion.id_tipoMuestreo, muestreo)" uib-popover="Modificar" popover-trigger="mouseenter"><i class="fa fa-edit"></i></button>
+                  <button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!muestreoSeleccion)" ng-click="eliminaTipoMuestreo(muestreoSeleccion.id_tipoMuestreo)"><i class="fa fa-remove" uib-popover="Eliminar" popover-trigger="mouseenter"></i></button>
+                </span>
+
+                <div class="col-md-12" style="margin-top: 2%;">
+                  <input class="form-control" placeholder="Tipo Muestreo" ng-model="muestreo">
+                </div>
+              </div>
+            </div> -->
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--
+            <div class="col-md-12 puntero" style="background: #ffcc33; border: 1px solid #000;" ng-click="muestra(6);">
+            <center style="margin-top: 1%;margin-bottom: 1%;"><h4 style="color: #000;">Tipo Analisis</h4><center>
+          </div>
+
+          <div class="col-md-12 row" style="margin-bottom: 1%;" ng-show="analisisDiv">
+          <span class="col-md-3"></span>
+          <div class="col-md-6" style="margin-top: 5%;">
+          <h3>Tipo Analisis</h3>
+          <select class="form-control col-md-8" ng-model="analisisSeleccion" ng-options="opt as opt.tipoAnalisis for opt in listaTipoAnalisis" style="height: 120px;">
+          <option value="" disabled selected style="display: none;">Seleccione Analisis</option>
+        </select>
+
+        <span class="btn-group col-md-4">
+        <button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!analisis)" ng-click="crearTipoAnalisis(analisis)"><i class="fa fa-plus"></i></button>
+        <button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!analisisSeleccion && !!analisis)" ng-click="modificaTipoAnalisis(analisisSeleccion.id_tipoAnalisis, analisis)"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!analisisSeleccion)" ng-click="eliminaTipoAnalisis(analisisSeleccion.id_tipoAnalisis)"><i class="fa fa-remove"></i></button>
+      </span>
+
+      <div class="col-md-12" style="margin-top: 2%;">
+      <input class="form-control" placeholder="Tipo Analisis" ng-model="analisis">
+    </div>
+  </div>
+</div> -->
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- <div class="col-md-12 puntero" style="background: #ffcc33; border: 1px solid #000;" ng-click="muestra(4);">
+<center style="margin-top: 1%;margin-bottom: 1%;"><h4 style="color: #000;">Envases</h4><center>
+</div>
+
+<div class="col-md-12 row" style="margin-bottom: 1%;" ng-show="Envases">
+
+<div class="col-md-6" style="margin-top: 5%;">
+<h3>Tipo Envase</h3>
+<select class="form-control col-md-8" ng-model="tipoEnvaseSeleccion" ng-change="listarEnvasesFiltro(tipoEnvaseSeleccion)" ng-options="opt as opt.tipoEnvase for opt in listaTipoEnvase" style="height: 120px;">
+<option value="" disabled selected style="display: none;">Seleccione Tipo de Envase</option>
+</select>
+<span class="btn-group col-md-4">
+<button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!tipoEnvase)" ng-click="crearTipoEnvase(tipoEnvase)"><i class="fa fa-plus"></i></button>
+<button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!tipoEnvaseSeleccion && !!tipoEnvase)" ng-click="modificaTipoEnvase(tipoEnvaseSeleccion.id_tipoEnvase, tipoEnvase)"><i class="fa fa-edit"></i></button>
+<button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!tipoEnvaseSeleccion)" ng-click="eliminaTipoEnvase(tipoEnvaseSeleccion.id_tipoEnvase)"><i class="fa fa-remove"></i></button>
+</span>
+
+<div class="col-md-12" style="margin-top: 2%;">
+<input class="form-control" placeholder="Tipo Envase" ng-model="tipoEnvase">
+</div>
+</div>
+
+<div class="col-md-6" style="margin-top: 5%;">
+<h3>Envases</h3>
+<select class="form-control col-md-8" ng-model="envaseSeleccion"  ng-disabled="!(!!tipoEnvaseSeleccion)" ng-options="opt as opt.envase for opt in listaEnvases" style="height: 120px;">
+<option value="" disabled selected style="display: none;">Seleccione Envases</option>
+</select>
+
+<span class="btn-group col-md-4">
+<button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!tipoEnvaseSeleccion && !!envase)" ng-click="crearEnvase(tipoEnvaseSeleccion, envase)"><i class="fa fa-plus"></i></button>
+<button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!tipoEnvaseSeleccion && !!envaseSeleccion && !!envase)" ng-click="modificaEnvase(envaseSeleccion.id_envase, envase)"><i class="fa fa-edit"></i></button>
+<button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!envaseSeleccion)" ng-click="eliminaEnvase(envaseSeleccion.id_envase)"><i class="fa fa-remove"></i></button>
+</span>
+
+<div class="col-md-12" style="margin-top: 2%;">
+<input class="form-control" placeholder="Envases" ng-model="envase">
+</div>
+</div>
+</div> -->
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<div class="col-md-12 puntero" style="background: #ffcc33; border: 1px solid #fff;" ng-click="muestra(5);">
+  <center style="margin-top: 1%;margin-bottom: 1%;"><h4 style="color: #000;"><label>Países</label></h4><center>
+  </div>
+
+  <div class="col-md-12 row" style="margin-bottom: 3%;" ng-show="paisesProducto">
+    <span class="col-md-3"></span>
+    <div class="col-md-6" style="margin-top: 3%;">
+      <h3>País</h3>
+      <select class="form-control col-md-8" ng-model="paisSeleccion" ng-options="opt as opt.nombrePais for opt in listarPaises" style="height: 120px;">
+        <option value="" disabled selected style="display: none;">Seleccione País</option>
+      </select>
+
+      <span class="btn-group col-md-4">
+        <button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!nombrePais)"  ng-click="crearPais(nombrePais)" uib-popover="Crear" popover-trigger="mouseenter"><i class="fa fa-plus"></i></button>
+        <button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!paisSeleccion && !!nombrePais)" ng-click="modificaPais(paisSeleccion.id_pais, nombrePais)" uib-popover="Modificar" popover-trigger="mouseenter"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!paisSeleccion)" ng-click="eliminaPais(paisSeleccion.id_pais)"><i class="fa fa-remove" uib-popover="Eliminar" popover-trigger="mouseenter"></i></button>
+      </span>
+
+      <div class="col-md-12" style="margin-top: 2%;">
+        <input class="form-control" placeholder="País" ng-model="nombrePais">
+      </div>
+    </div>
+
+    <!-- <div class="col-md-6 " style="margin-top: 5%;">
+    <h3>Producto</h3>
+    <select class="form-control col-md-8" ng-model="productoSeleccion" ng-options="opt as opt.nombreProducto for opt in listarProductos" style="height: 120px;">
+    <option value="" disabled selected style="display: none;">Seleccione Producto</option>
+  </select>
+
+  <span class="btn-group col-md-4">
+  <button class="btn btn-success col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-click="crearProducto(nombreProducto)"><i class="fa fa-plus"></i></button>
+  <button class="btn btn-info col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!productoSeleccion && !!nombreProducto)" ng-click="modificaProducto(productoSeleccion.id_producto, nombreProducto)"><i class="fa fa-edit"></i></button>
+  <button class="btn btn-danger col-md-12" style="margin-top: 2%; margin-bottom: 1%;" ng-disabled="!(!!productoSeleccion)" ng-click="eliminaProducto(productoSeleccion.id_producto)"><i class="fa fa-remove"></i></button>
+</span>
+
+<div class="col-md-12" style="margin-top: 2%;">
+<input class="form-control" placeholder="Producto" ng-model="nombreProducto">
+</div>
+</div> -->
+</div>
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<div ui-content-for="modals">
+  <div ng-include="'modalAvisos/mensajeAvisos.html'"></div>
+</div>
+
+</div>
+</div>

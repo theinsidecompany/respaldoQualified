@@ -1,0 +1,109 @@
+<div class="scrollable">
+  <div class="scrollable-content">
+    <div class="list-group" ui-toggle="uiSidebarRight">
+      <a class="list-group-item media" ng-repeat="user in chatUsers" ng-click="avisosModal(user)" ui-turn-on="mensajeAvisos">
+        <div class="pull-left">
+          <i class="fa {{user.status}}fa-user"></i>
+        </div>
+        <div class="media-body">
+          <h5 class="media-heading">{{user.name}}&nbsp;{{user.id}}</h5>
+          <small ng-switch on="user.online">
+
+
+            <!-- Manesajeria -->
+            <span ng-switch-when="mensajeNuevo">
+              <span class="label label-info"><i>Sin leer</i>
+              </span>
+            </span>
+            <span ng-switch-when="mensajeEnviado">
+              <span class="label label-info"><i>Mensaje Enviado</i>
+              </span>
+            </span>
+
+
+            <!-- Solicitud Cliente -->
+            <span ng-switch-when="nuevaSolicitud">
+              <span class="label label-success"><i>En Asignación</i>
+              </span>
+            </span>
+            <span ng-switch-when="SolicitudCancelada">
+              <span class="label label-danger"><i>Solicitud Cancelada</i>
+              </span>
+            </span>
+            <span ng-switch-when="SolFinalizada">
+              <span class="label label-success"><i>Solicitud Finalizada</i>
+              </span>
+            </span>
+            <span ng-switch-when="SolModificada">
+              <span class="label label-info"><i>Solicitud Modificada</i>
+              </span>
+            </span>
+
+
+            <!-- Ordenes de Trabajo Administrador -->
+            <span ng-switch-when="SolicitudRechazada">
+              <span class="label label-danger"><i>Rechazada</i>
+              </span>
+            </span>
+            <span ng-switch-when="inspectorAsignado">
+              <span class="label label-success"><i>Inspector Asigando</i>
+              </span>
+            </span>
+            <span ng-switch-when="OTFinalizada">
+              <span class="label label-success"><i>Orden de Trabajo Finalizada</i>
+              </span>
+            </span>
+
+
+            <!-- Ordenes de Trabajo Inspector -->
+            <span ng-switch-when="InspeccionAsignada">
+              <span class="label label-success"><i>Inspección Asignada</i>
+              </span>
+            </span>
+            <span ng-switch-when="AceptaInspeccion">
+              <span class="label label-success"><i>Inspección Aceptada</i>
+              </span>
+            </span>
+            <span ng-switch-when="RechazaInspeccion">
+              <span class="label label-danger"><i>Inspección Rechazada</i>
+              </span>
+            </span>
+            <span ng-switch-when="ApruebaInspeccion">
+              <span class="label label-success"><i>Inspección Aprobada</i>
+              </span>
+            </span>
+            <span ng-switch-when="DesapruebaInspeccion">
+              <span class="label label-danger"><i>Inspección no Aprueba</i>
+              </span>
+            </span>
+            <span ng-switch-when="ApruebaTransporte">
+              <span class="label label-success"><i>Inspección Transporte Aprobada</i>
+              </span>
+            </span>
+            <span ng-switch-when="DesapruebaTransporte">
+              <span class="label label-danger"><i>Inspección Transporte Rechazada</i>
+              </span>
+            </span>
+
+
+            <!-- Orden de Trabajo Laboratorio -->
+            <span ng-switch-when="AsignaLaboratorio">
+              <span class="label label-success"><i>Analisis Laboratorio Asignado</i>
+              </span>
+            </span>
+            <span ng-switch-when="LaboratorioAprueba">
+              <span class="label label-success"><i>Analisis Laboratorio Aprobado</i>
+              </span>
+            </span>
+            <span ng-switch-when="LaboratorioRechaza">
+              <span class="label label-danger"><i>Analisis Laboratorio Rechaza</i>
+              </span>
+            </span>
+
+
+          </small>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

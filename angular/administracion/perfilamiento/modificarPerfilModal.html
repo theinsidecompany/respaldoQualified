@@ -1,0 +1,33 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modificarPerfilModal' ui-state='modificarPerfilModal'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modificarPerfilModal" ng-click="cerrar()">&times;</button>
+          <h4>Modificar Perfil</h4>
+        </div>
+
+        <div class="modal-body">
+          <label>Nombre:</label><label ng-if="perfilExiste">Perfil Ya Existe</label>
+          <input class="form-control" placeholder="Ingrese nombre" ng-model="nombrePerfilMod" required><br>
+        </div>
+        <center><h5><strong>Llaves</strong></h5></center>
+        <center><button class="btn btn-info btn-block" ><i class="fa fa-key"></i></button></center>
+        <br>
+        <center><select style="height: 200px;width: 300px" ng-model="seleccionLlavesMod" multiple ng-options="opt.id_llave as opt.nombre_llave for opt in llavesCombo" >
+        </select></center>
+      </select>
+      <br>
+      <span class="col-md-2"></span>
+      <button class="btn btn-primary col-md-3" style="margin-left: 4%;" ng-disabled="!!(!seleccionLlavesMod)" type="button" ui-turn-off="modificarPerfilModal" ng-click="actualizarPerfil(id_perfil, nombrePerfilMod, seleccionLlavesMod)">Modificar</button>
+      <span class="col-md-1"></span>
+      <button class="btn btn-danger col-md-3" ui-turn-off="modificarPerfilModal" type="button" ng-click="cerrar()">Cancelar</button>
+
+    </div>
+
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
+</div>

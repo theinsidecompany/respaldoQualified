@@ -1,0 +1,101 @@
+<div class="scrollable modal col-lg-8 center-block" ui-if="modalVistaSDAdmin" ui-state="modalVistaSDAdmin">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 2%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalVistaSDAdmin" ng-click="deshabilitarEdicion()">&times;</button>
+          <label>Solicitud de Despacho {{id_solicitud}}</label>
+        </div>
+
+        <center>
+          <div>
+            <label class="label-warning col-md-12">Solicitante</label>
+            {{cliente}}
+          </div>
+        </center>
+
+        <div class="col-md-4" style="margin-top: 1%;">
+          <div>
+            <label class="label-warning col-md-12">Fecha Creación:</label>
+            {{fecha | date:'dd/MM/yyyy - hh:mm'}}
+          </div>
+        </div>
+
+        <div class="col-md-4" style="margin-top: 1%;" ng-if="!habilitar">
+          <div>
+            <label class="label-warning col-md-12">Inspector Asignado:</label>
+            {{inspectorAsignado}}
+          </div>
+        </div>
+
+        <div class="col-md-4" style="margin-top: 1%;" ng-if="!habilitar">
+          <div>
+            <label class="label-warning col-md-12">Chofer:</label>
+            {{chofer}}
+          </div>
+        </div>
+
+      </div>
+
+      <center style="margin-top 2%;"><h4><b>Detalle solicitud</b></h4></center>
+
+      <div class="well window">
+        <div class="scrollable-content section wrapper" ui-scroll-bottom="loadMore()">
+
+        <div class="container col-xs-12" style="margin-bottom: 1%;">
+          <div class="table-condensed col-xs-12 col-md-12" style="margin-top: 1%;">
+            <table class="table table-bordered">
+              <thead  style="background: #ffcc33;">
+                <th class="col-md-1">Lote</th>
+                <th class="col-md-1">Materia Prima</th>
+                <th class="col-md-1">Proveedor</th>
+                <th class="col-md-1">Pais</th>
+                <th class="col-md-1">Bodega</th>
+                <th class="col-md-1">Contenedor</th>
+                <th class="col-md-1">N° Sacos</th>
+                <th class="col-md-1">Kilos</th>
+                <th class="col-md-1">Cantidad</th>
+                <th class="col-md-1">Tipo Muestreo</th>
+                <th class="col-md-1">Calidad</th>
+                <th class="col-md-1">Inocuidad</th>
+                <th class="col-md-1">Observacion</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in lotesSD">
+                  <td>{{item.lote}}</td>
+                  <td>{{item.materiaPrima.nombreMateriaPrima}}</td>
+                  <td>{{item.trader.nombreTrader}}</td>
+                  <td>{{item.paisTrader.nombrePais}}</td>
+                  <td>{{item.bodega.nombreBodega}}</td>
+                  <td>{{item.contenedor}}</td>
+                  <td>{{item.lote}}</td>
+                  <td>{{item.bultos}}</td>
+                  <td>{{item.cantidad}}</td>
+                  <td>{{item.tipoMuestreo.descripcion}}</td>
+                  <td>
+                    <button class="btn btn-success" ng-if="item.inocuidad == true"><i class="fa fa-check"></i></button>
+                    <button class="btn btn-danger" ng-if="item.inocuidad == false"><i class="fa fa-ban"></i></button>
+                  </td>
+                  <td>
+                    <button class="btn btn-success" ng-if="item.calidad == true"><i class="fa fa-check"></i></button>
+                    <button class="btn btn-danger" ng-if="item.calidad == false"><i class="fa fa-ban"></i></button>
+                  </td>
+                  <td ng-if="item.observaciones == true"><center><button class="btn btn-danger"  ui-turn-on="modalObservacion" ng-click="enviarObservacionModal(item.id_solicitud, item.id_lote, id_solicitud)" uib-popover="Observacion" popover-trigger="mouseenter"><i class="fa fa-comment"></i></button></center></td>
+                  <td ng-if="item.observaciones == undefined"><center><button class="btn btn-warning"  ui-turn-on="modalObservacion" ng-click="enviarObservacionModal(item.id_solicitud, item.id_lote, id_solicitud)" uib-popover="Observacion" popover-trigger="mouseenter"><i class="fa fa-comment"></i></button></center></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+        <div class="modal-footer">
+        </div>
+
+      </div>
+    </div>
+  </div>

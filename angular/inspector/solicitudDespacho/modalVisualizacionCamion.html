@@ -1,0 +1,310 @@
+/*<style>
+.Fondo {
+  background-image: url("inspector/solicitudDespacho/Captura Contra.JPG");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-origin: content-box }
+
+  @media screen and (min-width: 700px) {
+    .lado {margin-left: 400px;}
+    .lado2 {margin-right: 400px;}
+  }
+
+
+  </style>*/
+
+  <div class="scrollable modal col-lg-6 center-block" ui-if='modalVistaCamion' ui-state='modalVistaCamion'>
+    <div class="modal-backdrop in"></div>
+    <div class="scrollable-content modal-dialog">
+      <div class="modal-content">
+        <div class="container col-xs-12" style="margin-bottom: 2%;">
+          <div class="modal-header">
+            <button class="close" ui-turn-off="modalVistaCamion">&times;</button>
+            <label>Solicitud de Despacho {{id_solicitud}}</label>
+          </div>
+
+          <div class="col-md-12">
+
+            <div class="col-md-9">
+              <span class="col-md-12 espacio">
+                <label class="col-md-3 col-xs-12">Nombre Chofer: </label>
+                <input class="col-md-9 col-xs-12 form-control" ng-disabled="true" ng-model="modalChofer" placeholder="Chofer">
+              </span>
+
+              <span class="col-md-12 espacio">
+                <label class="col-md-3 col-xs-12">Patente Transporte: </label>
+                <input class="col-md-9 col-xs-12 form-control" ng-disabled="true" ng-model="modalPatente" placeholder="Patente">
+              </span>
+
+              <span class="col-md-12 espacio">
+                <label class="col-md-3 col-xs-12">Destino: </label>
+                <input class="col-md-9 col-xs-12 form-control" ng-disabled="true" ng-model="modalDestino" placeholder="Destino">
+              </span>
+
+              <span class="col-md-12 espacio">
+                <label class="col-md-3 col-xs-12">N° Guia / Factura: </label>
+                <input class="col-md-9 col-xs-12 form-control" ng-disabled="true" ng-model="modalFactura" placeholder="N° Guia / Factura">
+              </span>
+
+            </div>
+
+
+
+            <div class="col-md-3 col-xs-3">
+
+              <div class="col-md-12 col-xs-12">
+                <span class="col-md-10" ></span>
+                <div class="col-md-2 Fondo" style="width: 125px; height: 100px">
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4">
+                <span ng-repeat="item in listaNon">
+                  <p class="btn btn-info" style="border: 1px solid #000; width: 55px; height: 50px">{{item.sello}}</p>
+                </span>
+              </div>
+
+
+
+              <div class="col-xs-4 col-md-1"></div>
+
+              <div class="col-md-4 col-xs-4">
+                <span ng-repeat="obj in listaPar">
+                  <p class="btn btn-info" style="border: 1px solid #000; width: 55px; height: 50px">{{obj.sello}}</p>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-12 top">
+            <button class="btn btn-success col-md-1 col-xs-12" ng-if="modalCheck != undefined" ng-click="cargaChecklist(modalCheck)" ui-turn-on="modalChecklist"><i class="fa fa-list-alt"></i></button>
+            <button class="btn btn-info col-md-2 col-xs-12" ng-if="modalCheck == undefined">Checklist no Realizado</button>
+            <button class="btn btn-warning col-md-1 col-xs-1" ui-turn-on="modalObservacionList" ng-click="enviarObservacionModalCheckList(listaObservaciones)" uib-popover="Observacion" popover-trigger="mouseenter"><i class="fa fa-comment"></i></button>
+            <button class="btn btn-primary col-md-3 col-xs-12" ng-click="imprimirCamion()">Imprimir formulario</button>
+            <button class="btn btn-primary col-md-2 col-xs-12" ng-click="imprimirChecklist()">Imprimir Checklist</button>
+            <span class="col-md-1"></span>
+            <button class="btn btn-warning col-md-2 col-xs-12" ui-turn-off="modalVistaCamion" ng-if="solicicitudD.proceso[0].id_proceso <= 11" ng-click="cancelarCamion(itemCargaCamion, solicicitudD, index)">Cancelar Registro</button>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-12" id="divCamion" ng-show="false" style="width: 600px;">
+          <table class="table table-bordered top">
+            <thead >
+              <tr>
+                <th colspan="2">
+                  <span class="col-md-12">
+                    <img src="resource\img\logo_menu.png" style="float: left;">
+                    <span style="float: right;"> OT: {{modalSolicitud.id_orden_trabajo}}</span>
+                  </span>
+                  <span class="col-md-12"><center>Inspeción de Verificación de Carga</center></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-md-3">Cliente</td>
+                <td class="col-md-9 text-center">{{modalCliente}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Lote y/o Contenedor</td>
+                <td class="col-md-9 text-center">{{modalLotes}}-{{modalContenedores}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Lugar de Inspección</td>
+                <td class="col-md-9 text-center">{{modalBodegas}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Nombre Chofer</td>
+                <td class="col-md-9 text-center">{{modalChofer}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Patente de Transporte</td>
+                <td class="col-md-9 text-center">{{modalPatente}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">Lugar de Destino</td>
+                <td class="col-md-9 text-center">{{modalDestino}}</td>
+              </tr>
+              <tr>
+                <td class="col-md-3">N° Guia o Factura</td>
+                <td class="col-md-9 text-center">{{modalFactura}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <div class="col-md-6 col-xs-6">
+
+            <div class="col-md-12 col-xs-12">
+              <img src="inspector/solicitudDespacho/Captura Contra.JPG" style="width: 80%; height: 100px;">
+            </div>
+
+            <span class="col-md-2"></span>
+
+            <div class="col-md-5 col-xs-5">
+              <span ng-repeat="item in lista1">
+                <p class="btn btn-default" style="border: 1px solid #000; width: 100%; height: 50px">{{item.sello}}</p>
+              </span>
+            </div>
+
+            <div class="col-md-5 col-xs-5">
+              <span ng-repeat="obj in lista2">
+                <p class="btn btn-default" style="border: 1px solid #000; width: 100%; height: 50px">{{obj.sello}}</p>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xs-6">
+            <span class="col-md-2"></span>
+            <div class="col-md-5 col-xs-5">
+              <span ng-repeat="item in lista3">
+                <p class="btn btn-default" style="border: 1px solid #000; width: 100%; height: 50px">{{item.sello}}</p>
+              </span>
+            </div>
+
+            <div class="col-md-5 col-xs-5">
+              <span ng-repeat="obj in lista4">
+                <p class="btn btn-default" style="border: 1px solid #000; width: 100%; height: 50px">{{obj.sello}}</p>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-xs-4" style="border: 1px solid #000; height: 70px; margin-top: 2%;">
+              <label>Nombre - Firma Inspeector</label>
+          </div>
+          <div class="col-md-4 col-xs-4" style="border: 1px solid #000; height: 70px; margin-top: 2%;">
+              Fecha: {{fecha_carga | date: 'dd/MM/yyyy'}}
+              Hora: {{fecha_carga | date: 'HH:mm'}}
+          </div>
+          <div class="col-md-4 col-xs-4" style="border: 1px solid #000; height: 70px; margin-top: 2%;">
+              <label>Nombre - Firma Encargado Bodega</label>
+          </div>
+        </div>
+
+
+        <div class="col-md-12 col-xs-12" ng-show="false" id="divChecklist">
+
+          <table class="table table-bordered top">
+            <thead >
+              <tr>
+                <th colspan="6">
+                  <span class="col-md-12 col-xs-12">
+                    <img src="resource\img\logo_menu.png" style="float: left;">
+                    <center>Check List Higiene y desinfección Transporte </center>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-md-2 col-xs-2">Empresa transporte</td>
+                <td class="col-md-2 col-xs-2">{{modalEmpresa}}</td>
+                <td class="col-md-2 col-xs-2">Nombre Chofer</td>
+                <td class="col-md-2 col-xs-2">{{modalChofer}}</td>
+                <td class="col-md-2 col-xs-2">Patente</td>
+                <td class="col-md-2 col-xs-2">{{modalPatente}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <table class="table table-bordered top">
+            <thead >
+              <tr>
+                <th colspan="4">
+                  <span class="col-md-12 col-xs-12">
+                    <label class="col-md-6 col-xs-6">1   LIMPIEZA: Indique el nivel de limpieza del vehiculo</label>
+                    <span class="col-md-2 col-xs-2"></span>
+                    <label class="col-md-2 col-xs-2">SI</label>
+                    <label class="col-md-2 col-xs-2">NO</label>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-md-6 col-xs-6">1.1 Vehiculo posee filtraciones de aceite</td>
+                <td class="col-md-2 col-xs-2"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.filtraAceite" name="filtraAceite" value="true"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.filtraAceite" name="filtraAceite" value="false"></td>
+              </tr>
+              <tr>
+                <td class="col-md-6 col-xs-6">1.2 vehiculo posee filtraciones de petroleo</td>
+                <td class="col-md-2 col-xs-2"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.filtraPetroleo" name="filtraPetroleo" value="true"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.filtraPetroleo" name="filtraPetroleo" value="false"></td>
+              </tr>
+              <tr>
+                <td class="col-md-6 col-xs-6">1.3 La rampla se encuentra con desechos de algún tipo</td>
+                <td class="col-md-2 col-xs-2"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.ramplaLimpia" name="rampla" value="true"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.ramplaLimpia" name="rampla" value="false"></td>
+              </tr>
+              <tr>
+                <td class="col-md-6 col-xs-6">1.4 Los neumaticos se encuentran con residuos</td>
+                <td class="col-md-2 col-xs-2"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.neumatico" name="neumatico" value="true"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.neumatico" name="neumatico" value="false"></td>
+              </tr>
+              <tr>
+                <td class="col-md-6 col-xs-6">1.5 Indique ultimas 3 cargas realizadas</td>
+                <td class="col-md-2 col-xs-2"><b>1: </b> {{modalCheck.checklist.carga1}} </td>
+                <td class="col-md-2 col-xs-2"><b>2: </b> {{modalCheck.checklist.carga2}} </td>
+                <td class="col-md-2 col-xs-2"><b>3: </b> {{modalCheck.checklist.carga3}} </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+          <table class="table table-bordered top">
+            <thead >
+              <tr>
+                <th colspan="4">
+                  <span class="col-md-12 col-xs-12">
+                    <label class="col-md-6 col-xs-6">2   DESINFECCIÓN: Indique el nivel del procesimiento de desinfección</label>
+                    <span class="col-md-2 col-xs-2"></span>
+                    <label class="col-md-2 col-xs-2">SI</label>
+                    <label class="col-md-2 col-xs-2">NO</label>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-md-6 col-xs-6">2.2 Se realiza desinfección de la rampla utilizando un aspersor con solucion de cloro al 30% inpregnando toda la superficie de la rampla</td>
+                <td class="col-md-2 col-xs-2"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.ramplaDesinfecta" name="filtraAceite" value="true"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.ramplaDesinfecta" name="filtraAceite" value="false"></td>
+              </tr>
+              <tr>
+                <td class="col-md-6 col-xs-6">2.2 Se da un tiempo necesario para que el desinfectante actue sobre la superficie de la rampla antes de cargar</td>
+                <td class="col-md-2 col-xs-2"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.ramplaTiempo" name="filtraPetroleo" value="true"></td>
+                <td class="col-md-2 col-xs-2"><input type="radio" ng-model="modalCheck.checklist.ramplaTiempo" name="filtraPetroleo" value="false"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="col-md-12 col-xs-12" style="border: 1px solid #000;">
+            <b>Cualquier problema o comentario al control realizado informar a:</b><br>
+            <b>agodoy@qualified.cl</b><br>
+            <b>scarmona@qualified.cl    Departamento de Operaciones</b>
+          </div>
+
+          <div class="col-md-12 col-xs-12" style="border: 1px solid #000;">
+
+            <span class="col-md-8 col-xs-8">Respondable Checkeo:  {{usuario}}</span>
+            <span class="col-md-4 col-xs-4">Fecha: {{modalCheck.checklist.fecha | date: 'dd/MM/yyyy'}}</span>
+
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>

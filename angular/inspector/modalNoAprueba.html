@@ -1,0 +1,54 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalNoAprueba' ui-state='modalNoAprueba'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalNoAprueba">&times;</button>
+          <label>No aprueba inspección</label>
+        </div>
+        <div class="col-xs-12 text-center" style="margin-top: 2%;">
+          <h4>Observaciones</h4>
+          <span class="col-md-1"></span>
+          <textarea class="form-control" style="width: 80%; height: 100%;" ng-model="observaciones"> </textarea><br>
+        </div>
+
+
+        <center>
+          <form name="myForm">
+            <center>
+              <span class="btn-group">
+                <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile, modalSol)" class="btn btn-success"><i class="fa fa-upload"></i></button>
+                <div class="fileUpload btn btn-info">
+                  <i class="fa fa-file-image-o"></i>
+                  <input type="file" class="upload" ngf-select ng-model="picFile" name="file"
+                  accept="image/*" ngf-max-size="40MB" required
+                  ngf-model-invalid="errorFile">
+                </div>
+                <button ng-click="picFile = null" ng-show="picFile" class="btn btn-danger"><i class="fa fa-remove"></i></button>
+              </span>
+            </center>
+            <br>
+
+            <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">
+            <span class="progress" ng-show="picFile.progress >= 0">
+              <div style="width:{{picFile.progress}}%"
+              ng-bind="picFile.progress + '%'"></div>
+            </span>
+            <span ng-show="picFile.result">Éxito</span>
+            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+
+          </form>
+        </center>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning col-xs-3"  style="margin-left: 20%;" ng-disabled="!(!!observaciones)" ng-click="desapruebaSoliciud(modalSol, observaciones)" ui-turn-off="modalNoAprueba">Desaprobar</button>
+        <button class="btn btn-danger col-xs-3" ui-turn-off="modalNoAprueba" style="margin-left: 10%;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

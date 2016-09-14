@@ -1,0 +1,215 @@
+<div class="scrollable modal col-lg-6 center-block" ui-if='modalMuestreo' ui-state='modalMuestreo' ng-controller="limpiarCampos">
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content ">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalMuestreo">&times;</button>
+          <label>Nueva Muestra {{titulo}}</label>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 5%;">
+
+          <div class="col-md-12" style="margin-bottom: 1%;" ng-show="mostrarTipo">
+            <label class="col-md-3">N° Cotización</label>
+            <input class="col-md-3 form-control" ng-model="codigo" placeholder="N° Cotización">
+            <select class="form-control col-md-6" ng-model="retiro">
+              <option value="muestreo">Muestreo</option>
+              <option value="retiro">Retiro</option>
+            </select>
+          </div>
+
+          <div class="col-md-12" style="margin-bottom: 1%;" ng-show="!mostrarTipo">
+            <label class="col-md-3">Muestra/Retiro</label>
+            <select class="form-control col-md-9" ng-model="retiroAnimal">
+              <option value="muestreo">Muestreo</option>
+              <option value="retiro">Retiro</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-12" ng-show="mostrarTipo" >
+            <div class="col-md-12">
+              <label class="col-md-3">Tipo</label>
+              <textarea class="col-md-9 form-control" ng-model="tipoMuestra" placeholder="Tipo"></textarea>
+            </div>
+          </div>
+
+
+          <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+          <div ng-show="!mostrarTipo">
+            <div class="col-md-12" ng-show="mostrarAceite" style="margin-bottom: 1%;">
+              <label class="col-md-6">Composito</label>
+              <input class="col-md-6 form-control" type="checkbox" ng-click="compositoSeleccion()" ng-model="composito">
+            </div>
+
+            <div class="col-md-12" ng-show="habilitaTrader" style="margin-top: 1%;">
+              <label class="col-md-3">Traders</label>
+              <select class="form-control col-md-9" ng-model="traders" ng-options="opt as opt.nombre for opt in listaTodoTraders">
+                <option value="" disabled selected style="display: none;">Seleccione Trader</option>
+              </select>
+            </div>
+
+            <div class="col-md-12" style="margin-top: 1%;">
+              <label class="col-md-3">Origen</label>
+              <select class="form-control col-md-9" ng-model="pais" ng-options="opt as opt.nombrePais for opt in listarPaises">
+                <option value="" disabled selected style="display: none;">Seleccione Origen</option>
+              </select>
+            </div>
+
+            <div class="col-md-12" style="margin-top: 1%;">
+              <label class="col-md-3">Bodega</label>
+              <select class="form-control col-md-9" ng-model="bodega" ng-options="opt as opt.nombreBodega for opt in listarBodegas">
+                <option value="" disabled selected style="display: none;">Seleccione Bodega</option>
+              </select>
+            </div>
+
+            <div class="col-md-12" style="margin-top: 1%;">
+              <label class="col-md-3">Encargado Bodega</label>
+              <input class="col-md-9 form-control" ng-model="encargadoBodega" placeholder="Encargado Bodega">
+            </div>
+
+            <div class="col-md-12" style="margin-top: 1%;">
+              <label class="col-md-3">Planta Procedencia</label>
+              <input type="text" class="form-control col-md-9" ng-model="procedencia" placeholder="Planta Procedencia">
+            </div>
+
+            <div class="col-md-12" style="margin-top: 1%;">
+              <label class="col-md-3">Toneladas</label>
+              <input type="text" class="form-control col-md-9" onkeypress="return numeros(event)" ng-model="toneladas" placeholder="Toneladas">
+            </div>
+
+            <!-- Mostarr Datos tipo Muestreo Aceite -->
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="col-md-12" ng-show="mostrarAceite">
+              <div class="col-md-12" ng-disabled="composito" style="margin-top: 1%;">
+                <center>
+                  <label class="col-md-12">Estratos</label>
+                  <button ng-disabled="composito" class="btn btn-{{colorSuperior}}" ng-click="seleccionarSuperior()">Superior</button>
+                  <button ng-disabled="composito" class="btn btn-{{colorMedio}}" ng-click="seleccionarMedio()">Medio</button>
+                  <button ng-disabled="composito" class="btn btn-{{colorInferior}}" ng-click="seleccionarInferior()">Inferior</button>
+                </center>
+              </div>
+
+              <div class="col-md-12" style="margin-top: 1%;">
+                <label class="col-md-3">Tipo Aceite</label>
+                <input class="col-md-9 form-control" ng-model="tipoAceite" placeholder="Tipo Aceite">
+              </div>
+
+              <div class="col-md-12" style="margin-top: 1%;">
+                <label class="col-md-3">Fabricante</label>
+                <input type="text" class="form-control col-md-9" ng-model="fabricante" placeholder="Fabricante">
+              </div>
+
+              <div class="col-md-12">
+                <button class="btn btn-primary" ng-disabled="!(!!pais && !!bodega && !!encargadoBodega && !!procedencia && !!toneladas &&tipoAceite && fabricante)"
+                ng-click="agregarAceite(retiroAnimal, composito, traders, pais, bodega, encargadoBodega, procedencia, toneladas, tipoAceite, fabricante, codigo, tipoMuestra)"
+                >Listo aceite</button>
+              </div>
+            </div>
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+            <!-- Mostrar tipos de muestreo de Granos -->
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="col-md-12" ng-show="mostrarGranos">
+              <div class="col-md-12" style="margin-top: 1%;">
+                <label class="col-md-3">Materia Prima</label>
+                <select class="form-control col-md-9" ng-model="materiaPrima" ng-change="listaTradersFiltro(materiaPrima)" ng-options="opt as opt.nombreMateriaPrima for opt in listarMateriaPrima">
+                  <option value="" disabled selected style="display: none;">Seleccione Materia Prima</option>
+                </select>
+              </div>
+
+              <div class="col-md-12" style="margin-top: 1%;">
+                <label class="col-md-3">Proveedor</label>
+                <select class="form-control col-md-9" ng-model="trader" ng-options="opt as opt.nombreTrader for opt in listaTraders">
+                  <option value="" disabled selected style="display: none;">Seleccione Proveedor</option>
+                </select>
+              </div>
+
+              <div class="col-md-12" style="margin-top: 1%;">
+                <label class="col-md-3">Temperatura</label>
+                <input class="col-md-9 form-control" ng-model="temperatura" placeholder="Temperatura" onkeypress="return numeros(event)">
+              </div>
+
+              <div class="col-md-12" style="margin-top: 1%;">
+                <label class="col-md-3">Tipo Almacenaje</label>
+                <select class="col-md-9 form-control" ng-model="seleccionAlmacenaje">
+                  <option value="" selected disabled style="display: none;">Seleccione Almacenaje</option>
+                  <option value="granel">Granel</option>
+                  <option value="piso">A Psio</option>
+                  <option value="silo">Silo</option>
+                </select>
+              </div>
+
+              <div class="col-md-12">
+                <button class="btn btn-primary" ng-click="agregarGranos(retiroAnimal, traders, pais, bodega, encargadoBodega, procedencia, toneladas, materiaPrima, trader, temperatura, seleccionAlmacenaje)"
+                >Listo grano</button>
+              </div>
+
+            </div>
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+          </div>
+          <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+          <!-- Mostrar Tipos de analisis para agua  -->
+          <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+          <div style="margin-top: 5%;" ng-show="mostrarAgua">
+            <select class="col-md-12 form-control" ng-model="agua" ng-change="seleccionAgua(agua)" ng-options="opt as opt.descripcion for opt in listaAnalisisAgua">
+              <option value="" selected disabled style="display: none;">Seleccione Tipo Analisis</option>
+            </select>
+
+
+            <button class="col-md-12 btn btn-primary" ng-click="agregarListaAnalisisAgua(agua, listaTipoAnalisis)" style="margin-bottom: 1%;">Agregar</button>
+
+            <div class="col-md-12">
+              <span class="col-md-3 btn btn-info" ng-repeat="item in listaAnalisis track by $index"><label ng-click="mostrar($index, listaAnalisis)">{{item.tipoAnalisis}}-({{item.cantidad}}) &nbsp;</label><i class="fa fa-remove" ng-click="remover($index, listaAnalisis)"></i></span>
+            </div>
+
+          </div>
+          <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+
+          <!-- Mostrar Analisis Para Tipos de Muestreos -->
+          <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+          <div style="margin-top: 1%;" ng-show="mostrarAnalisis">
+            <button class="btn btn-danger" ng-click="desSeleccionar(listaTipoAnalisis)" style="margin-bottom: 1%; margin-top: 1%; float: right; margin-left: 1%;">Desmarcar Todo</button>
+            <button class="btn btn-success" ng-click="seleccionarTodo(listaTipoAnalisis)" style="margin-bottom: 1%; margin-top: 1%; float: right;">Marcar Todo</button>
+
+            <table class="col-md-12 table table-bordered" >
+              <thead></thead>
+              <tbody>
+                <tr ng-repeat="item in listaTipoAnalisis">
+                  <td>{{item.descripcion}}</td>
+                  <td><input type="checkbox" ng-model="item.selAnalisis"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+          <div class="col-md-12">
+            <button class="col-md-12 btn btn-primary" ng-click="agregarMuestreoAgua(codigo, retiro, tipoMuestra, listaAnalisis)" ng-show="muestraCrear">agregar Muestreo</button>
+          </div>
+
+
+          <div class="col-md-12" ng-show="mostrarMuestreo">
+            <button ng-disabled="!(!!codigo && !!tipoMuestra)" class="btn btn-primary" ng-click="agregarMuestreo(codigo, retiro, listaTipoAnalisis, tipoMuestra)"
+            >Listo muestra</button>
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

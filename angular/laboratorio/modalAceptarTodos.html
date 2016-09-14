@@ -1,0 +1,58 @@
+<div class="scrollable modal col-lg-4 center-block" ui-if='modalAceptarTodos' ui-state='modalAceptarTodos'>
+  <div class="modal-backdrop in"></div>
+  <div class="scrollable-content modal-dialog">
+    <div class="modal-content">
+      <div class="container col-xs-12" style="margin-bottom: 5%;">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modalAceptarTodos">&times;</button>
+          <label>Enviar Items</label>
+        </div>
+        <div class="col-xs-12 text-center">
+
+
+          <center>
+            <label>N° Informe</label>
+            <span class="col-md-12">
+              <span class="col-md-3"></span>
+                <input placeholder="N° Informe" onkeypress="return numeros(event)" ng-model="nroInforme" class="form-control col-md-6">
+            </span>
+            <br>
+            <input type="hidden" ng-model="nombreArchivos">
+            <form name="myForm">
+              <center>
+                <span class="btn-group" style="margin-top: 3%;">
+                  <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile, listaNueva, solicitud, nroInforme, listaLotesModalAcepta)" class="btn btn-success"><i class="fa fa-upload"></i></button>
+                  <div class="fileUpload btn btn-info">
+                    <i class="fa fa-file-image-o"></i>
+                    <input type="file" class="upload" ngf-select ng-model="picFile" name="file"
+                    accept="application/pdf" ngf-max-size="40MB" required
+                    ngf-model-invalid="errorFile">
+                  </div>
+                  <button ng-click="picFile = null" ng-show="picFile" class="btn btn-danger"><i class="fa fa-remove"></i></button>
+
+                </span>
+
+                <span class="progress" ng-show="picFile.progress >= 0">
+                  <div style="width:{{picFile.progress}}%"
+                  ng-bind="picFile.progress + '%'"></div>
+                </span>
+                <span ng-show="picFile.result">Éxito</span>
+                <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+
+              </center>
+            </form>
+          </center>
+
+            <span class="col-xs-2"></span>
+            <center><button class="btn btn-success col-xs-3 top" ng-disabled="!(!!nroInforme)"  style="margin-left: 20%;" ng-click="enviarLotesUsuario(listaNueva, solicitud, listaLotesModalAcepta, nombreArchivos)" ui-turn-off="modalAceptarTodos">Aprobar</button></center>
+            <!-- <button class="btn btn-danger col-xs-3 top" ui-turn-off="modalAceptarTodos" style="margin-left: 10%;">Cancelar</button> -->
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+      </div>
+
+    </div>
+  </div>
+</div>
