@@ -77,7 +77,7 @@ app.controller('muestreoController', function ($scope, $notify, $http, $rootScop
 
       $notify.setTime(3).setPosition('bottom-right').showCloseButton(true).showProgressBar(true);
       $notify.setPosition('bottom-left');
-      $notify.info('Notificacion', 'Sin Seleeccion de Analisis');
+      $notify.info('Notificacion', 'Sin Seleccion de Análisis');
 
     }else{
 

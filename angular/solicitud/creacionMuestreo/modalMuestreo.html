@@ -101,7 +101,7 @@
                 <input type="text" class="form-control col-md-9" ng-model="fabricante" placeholder="Fabricante">
               </div>
 
-              <div class="col-md-12">
+              <div class="col-md-12" style="margin-top: 2%;">
                 <button class="btn btn-primary" ng-disabled="!(!!pais && !!bodega && !!encargadoBodega && !!procedencia && !!toneladas &&tipoAceite && fabricante)"
                 ng-click="agregarAceite(retiroAnimal, composito, traders, pais, bodega, encargadoBodega, procedencia, toneladas, tipoAceite, fabricante, codigo, tipoMuestra)"
                 >Agregar Aceite</button>
@@ -158,7 +158,7 @@
           <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
           <div style="margin-top: 5%;" ng-show="mostrarAgua">
             <select class="col-md-12 form-control" ng-model="agua" ng-change="seleccionAgua(agua)" ng-options="opt as opt.descripcion for opt in listaAnalisisAgua">
-              <option value="" selected disabled style="display: none;">Seleccione Tipo Analisis</option>
+              <option value="" selected disabled style="display: none;">Seleccione Tipo Análisis</option>
             </select>
 
 
